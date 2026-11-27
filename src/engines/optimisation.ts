@@ -5,7 +5,7 @@ import type {
   ScenarioParameters,
 } from '../types/domain';
 import { FACILITIES, PRODUCTS, getFacilityById, getProductBySku, haversineDistanceKm } from './dataset';
-import { forecastFacilitySku } from './forecasting';
+import { summariseFacilitySku } from './forecasting';
 import { computeTransportCostUsd } from './matchmaking';
 import { assessBatchWasteRisks } from './wasteRisk';
 
@@ -57,7 +57,7 @@ export function runPrescriptiveOptimisation(
 
   for (const fac of FACILITIES) {
     for (const prod of PRODUCTS) {
-      const fc = forecastFacilitySku(
+      const fc = summariseFacilitySku(
         fac.id,
         prod.sku,
         batches,

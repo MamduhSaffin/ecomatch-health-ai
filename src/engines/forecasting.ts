@@ -8,6 +8,7 @@ import type {
 } from '../types/domain';
 import {
   FACILITIES,
+  PRODUCTS,
   SIMULATION_REFERENCE_DATE,
   addDaysToIso,
   diffDaysBetweenIso,
@@ -349,20 +350,32 @@ const FEATURE_META: { name: string; desc: string }[] = [
 ];
 
 // Memoized forecast cache per (facilityId, sku) for historical model training
-const modelCache = new Map<
-  string,
-  {
-    modelComparison: ModelEvaluationMetric[];
-    selectedModelId: ModelEvaluationMetric['modelId'];
-    selectedModelName: string;
-    featureImportance: FeatureImportanceItem[];
-    future12: number[];
-    testPreds: number[];
-    residualStdDev: number;
-    avgWeeklyDemand: number;
-    historyPoints: WeeklyConsumptionPoint[];
-  }
->();
+interface ForecastModel {
+  modelComparison: ModelEvaluationMetric[];
+  selectedModelId: ModelEvaluationMetric['modelId'];
+  selectedModelName: string;
+  featureImportance: FeatureImportanceItem[];
+  future12: number[];
+  testPreds: number[];
+  residualStdDev: number;
+  avgWeeklyDemand: number;
+  historyPoints: WeeklyConsumptionPoint[];
+}
+
+const modelCache = new Map<string, ForecastModel>();
+
+export function precomputeForecastModels(): Array<[string, ForecastModel]> {
+  return FACILITIES.flatMap(({ id }) =>
+    PRODUCTS.map(({ sku }): [string, ForecastModel] => {
+      const model = getOrTrainSeries(id, sku);
+      return [`${id}::${sku}`, { ...model, historyPoints: model.historyPoints.slice(-24) }];
+    }),
+  );
+}
+
+export function loadForecastModels(models: Array<[string, ForecastModel]>): void {
+  for (const [key, model] of models) modelCache.set(key, model);
+}
 
 function getOrTrainSeries(facilityId: string, sku: string) {
   const key = `${facilityId}::${sku}`;
@@ -519,13 +532,13 @@ function getOrTrainSeries(facilityId: string, sku: string) {
   return result;
 }
 
-export function forecastFacilitySku(
+export function summariseFacilitySku(
   facilityId: string,
   sku: string,
   batches: InventoryBatch[],
   demandMultiplier = 1.0,
   safetyStockMultiplier = 1.0
-): SeriesForecastResult {
+) {
   const trained = getOrTrainSeries(facilityId, sku);
   const facility = FACILITIES.find((f) => f.id === facilityId);
   const leadTimeWeeks = facility?.leadTimeWeeks ?? 2;
@@ -585,9 +598,34 @@ export function forecastFacilitySku(
   );
   const expectedSurplusUnits = Math.max(0, currentUsableStock - eightWeekNeed);
 
+  return {
+    scaledFuture,
+    avgWeeklyDemand,
+    forecast12WeeksTotal,
+    currentUsableStock,
+    predictedDepletionWeeks: depletionWeeks,
+    stockoutProbabilityPct,
+    recommendedReorderQty,
+    safetyStockQty,
+    expectedSurplusUnits,
+  };
+}
+
+export function forecastFacilitySku(
+  facilityId: string,
+  sku: string,
+  batches: InventoryBatch[],
+  demandMultiplier = 1.0,
+  safetyStockMultiplier = 1.0,
+): SeriesForecastResult {
+  const trained = getOrTrainSeries(facilityId, sku);
+  const { scaledFuture, ...summary } = summariseFacilitySku(
+    facilityId, sku, batches, demandMultiplier, safetyStockMultiplier,
+  );
+
   // Build chart series: last 24 historical weeks + 12 forecast weeks
   const series: ForecastPoint[] = [];
-  const histSlice = trained.historyPoints.slice(TOTAL_WEEKS - 24);
+  const histSlice = trained.historyPoints.slice(-24);
   const testStartWeekIndex = VAL_END + 1;
 
   for (const pt of histSlice) {
@@ -627,15 +665,8 @@ export function forecastFacilitySku(
     trainWeeks: TRAIN_END,
     valWeeks: VAL_END - TRAIN_END,
     testWeeks: TOTAL_WEEKS - VAL_END,
-    avgWeeklyDemand,
-    forecast12WeeksTotal,
     residualStdDev: trained.residualStdDev,
-    currentUsableStock,
-    predictedDepletionWeeks: depletionWeeks,
-    stockoutProbabilityPct,
-    recommendedReorderQty,
-    safetyStockQty,
-    expectedSurplusUnits,
+    ...summary,
     series,
   };
 }

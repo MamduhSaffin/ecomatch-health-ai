@@ -1,6 +1,8 @@
 import { handleAsNodeRequest } from 'cloudflare:node';
 import express from 'express';
 import manifest from './submission/submission-manifest.json';
+import forecastModels from './.worker-forecast-models.json';
+import { loadForecastModels } from './src/engines/forecasting';
 import { z } from 'zod';
 import {
   DEFAULT_SCENARIO_PARAMS,
@@ -110,6 +112,21 @@ function createFreshStore(isDemo: boolean): OperationalStore {
 let productionStore = createFreshStore(false);
 let demoSandboxStore = createFreshStore(true);
 
+loadForecastModels(forecastModels as Parameters<typeof loadForecastModels>[0]);
+const modelBenchmark = getNetworkModelBenchmark();
+
+// Prepare the first demo response outside the request's CPU budget.
+const initialDemoAnalytics = calculateWorkspaceAnalytics(demoSandboxStore, demoSandboxStore.batches);
+let demoAnalytics: typeof initialDemoAnalytics | undefined = initialDemoAnalytics;
+
+function calculateWorkspaceAnalytics(store: OperationalStore, visibleBatches: InventoryBatch[]) {
+  const wasteRisks = assessBatchWasteRisks(visibleBatches);
+  const { matches, ineligibleAudit } = computeIntelligentMatches(store.batches);
+  const optimisation = runPrescriptiveOptimisation(store.batches, DEFAULT_SCENARIO_PARAMS);
+  const impact = computeImpactSummary(store.batches, store.transfers);
+  return { wasteRisks, matches, ineligibleAudit, optimisation, impact };
+}
+
 function getStore(isDemo: boolean): OperationalStore {
   return isDemo ? demoSandboxStore : productionStore;
 }
@@ -121,6 +138,7 @@ function appendAudit(store: OperationalStore, entry: Omit<AuditLogEntry, 'id' | 
     ...entry,
   });
   if (store.auditLogs.length > 200) store.auditLogs.length = 200;
+  if (store === demoSandboxStore) demoAnalytics = undefined;
 }
 
 // ============================================================================
@@ -375,6 +393,7 @@ export function createApiApp() {
   // ---- Demo Sandbox Reset (strictly affects ONLY demoSandboxStore) ----
   app.post('/api/demo/reset', (_req, res) => {
     demoSandboxStore = createFreshStore(true);
+    demoAnalytics = initialDemoAnalytics;
     res.json({ ok: true, message: 'Judge Demo sandbox reset to baseline synthetic dataset.' });
   });
 
@@ -385,12 +404,9 @@ export function createApiApp() {
 
     const { store, actor, isDemo } = scope;
     const visibleBatches = filterBatchesForActor(store.batches, actor);
-    const wasteRisks = assessBatchWasteRisks(visibleBatches);
-    // Network matching operates across verified network surplus/shortage while preserving org visibility
-    const { matches, ineligibleAudit } = computeIntelligentMatches(store.batches);
-    const optimisation = runPrescriptiveOptimisation(store.batches, DEFAULT_SCENARIO_PARAMS);
-    const impact = computeImpactSummary(store.batches, store.transfers);
-    const benchmark = getNetworkModelBenchmark();
+    const analytics = isDemo
+      ? (demoAnalytics ??= calculateWorkspaceAnalytics(store, visibleBatches))
+      : calculateWorkspaceAnalytics(store, visibleBatches);
 
     res.json({
       isDemo,
@@ -399,13 +415,9 @@ export function createApiApp() {
       facilities: FACILITIES,
       products: PRODUCTS,
       batches: visibleBatches,
-      wasteRisks,
-      matches,
-      ineligibleAudit,
+      ...analytics,
       transfers: store.transfers,
-      optimisation,
-      impact,
-      modelBenchmark: benchmark,
+      modelBenchmark,
       auditLogs: store.auditLogs.slice(0, 60),
       users: !isDemo && actor.role === 'founder_admin' ? listRegisteredUsers() : [],
     });

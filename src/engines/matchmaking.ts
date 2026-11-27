@@ -11,7 +11,7 @@ import {
   getProductBySku,
   haversineDistanceKm,
 } from './dataset';
-import { forecastFacilitySku } from './forecasting';
+import { summariseFacilitySku } from './forecasting';
 import { assessBatchWasteRisks } from './wasteRisk';
 
 export interface MatchmakingOutput {
@@ -70,7 +70,7 @@ export function computeIntelligentMatches(
   for (const fac of FACILITIES) {
     if (!fac.verified) continue;
     for (const prod of PRODUCTS) {
-      const fc = forecastFacilitySku(fac.id, prod.sku, batches, demandMultiplier, safetyStockMultiplier);
+      const fc = summariseFacilitySku(fac.id, prod.sku, batches, demandMultiplier, safetyStockMultiplier);
       // Facility has an actionable shortage if it needs reorder AND has low depletion coverage or high stockout probability
       if (fc.recommendedReorderQty >= 10 && (fc.predictedDepletionWeeks < 4.5 || fc.stockoutProbabilityPct >= 35)) {
         const list = shortagesBySku.get(prod.sku) ?? [];

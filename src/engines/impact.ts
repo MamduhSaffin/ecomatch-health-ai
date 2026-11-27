@@ -1,6 +1,6 @@
 import type { ImpactSummary, InventoryBatch, TransferRecord } from '../types/domain';
 import { FACILITIES, PRODUCTS } from './dataset';
-import { forecastFacilitySku } from './forecasting';
+import { summariseFacilitySku } from './forecasting';
 import { computeIntelligentMatches } from './matchmaking';
 import { DEFAULT_SCENARIO_PARAMS, runPrescriptiveOptimisation } from './optimisation';
 import { assessBatchWasteRisks } from './wasteRisk';
@@ -41,7 +41,7 @@ export function computeImpactSummary(
   let totalPredictedShortageUnits = 0;
   for (const fac of FACILITIES) {
     for (const prod of PRODUCTS) {
-      const fc = forecastFacilitySku(fac.id, prod.sku, batches);
+      const fc = summariseFacilitySku(fac.id, prod.sku, batches);
       if (fc.recommendedReorderQty >= 10 && (fc.predictedDepletionWeeks < 4.5 || fc.stockoutProbabilityPct >= 35)) {
         predictedShortageSeriesCount++;
         totalPredictedShortageUnits += fc.recommendedReorderQty;
