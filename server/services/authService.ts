@@ -19,7 +19,12 @@ interface StoredAccount {
   passwordHash: string;
 }
 
-const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
+let sessionSecret: string | undefined;
+
+function getSessionSecret(): string {
+  sessionSecret ??= process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
+  return sessionSecret;
+}
 const SESSION_TTL_MS = 1000 * 60 * 60 * 8; // 8 hours
 
 // In-memory account store for self-contained demonstration runtime
@@ -158,7 +163,7 @@ export function issueSessionToken(user: AuthUser): string {
     exp: Date.now() + SESSION_TTL_MS,
   };
   const encoded = Buffer.from(JSON.stringify(payload)).toString('base64url');
-  const sig = crypto.createHmac('sha256', SESSION_SECRET).update(encoded).digest('base64url');
+  const sig = crypto.createHmac('sha256', getSessionSecret()).update(encoded).digest('base64url');
   return `${encoded}.${sig}`;
 }
 
@@ -166,7 +171,7 @@ export function verifySessionToken(token: string): AuthUser | null {
   const parts = token.split('.');
   if (parts.length !== 2) return null;
   const [encoded, sig] = parts;
-  const expectedSig = crypto.createHmac('sha256', SESSION_SECRET).update(encoded).digest('base64url');
+  const expectedSig = crypto.createHmac('sha256', getSessionSecret()).update(encoded).digest('base64url');
   const sigBuf = Buffer.from(sig);
   const expBuf = Buffer.from(expectedSig);
   if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
