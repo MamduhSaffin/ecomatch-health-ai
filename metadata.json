@@ -1,0 +1,6 @@
+{
+  "name": "EcoMatch Health AI",
+  "description": "Predict Waste. Redistribute Resources. Expand Healthcare Capacity. Intelligent healthcare resource optimisation platform for UN SDG 12.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

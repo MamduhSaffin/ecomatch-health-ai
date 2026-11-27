@@ -1,0 +1,9 @@
+facility_id,org_id,name,type,region,city,lat,lon,bed_count,verified,lead_time_weeks,avg_monthly_budget_usd
+FAC-001,ORG-METRO,Metropolitan General Hospital,Tertiary Hospital,Northern Corridor,Northgate,51.528,-0.128,640,True,2,148000
+FAC-002,ORG-VALLEY,Riverview Community Clinic,Community Clinic,Northern Corridor,Riverview,51.462,-0.021,110,True,3,32000
+FAC-003,ORG-COAST,St. Jude Regional Medical Centre,Regional Medical Centre,Eastern Seaboard,Portside,51.612,0.245,480,True,2,112000
+FAC-004,ORG-COAST,Eastgate Surgical Institute,Surgical Institute,Eastern Seaboard,Eastgate,51.545,0.118,220,True,2,78000
+FAC-005,ORG-METRO,Northshore Maternal & Paediatric Hospital,Specialty Hub,Northern Corridor,Northshore,51.688,-0.095,310,True,2,84000
+FAC-006,ORG-VALLEY,Highland Trauma & Diagnostics Centre,Regional Medical Centre,Central & Highland,Highland,51.345,-0.342,390,True,3,95000
+FAC-007,ORG-VALLEY,Valley Primary Health Hub,Community Clinic,Central & Highland,Meadowvale,51.392,-0.185,85,True,3,24500
+FAC-008,ORG-COAST,Harbourside Oncology & Infusion Clinic,Specialty Hub,Eastern Seaboard,Harbourside,51.418,0.282,165,True,2,68000

@@ -1,0 +1,30 @@
+name: EcoMatch Health AI CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run reproducible data science pipeline
+        run: python3 scripts/run_pipeline.py
+      - name: Install Node dependencies
+        run: npm ci
+      - name: TypeScript typecheck
+        run: npm run lint
+      - name: Run automated Vitest suite
+        run: npm test
+      - name: Production Vite build
+        run: npm run build

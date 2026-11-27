@@ -1,0 +1,1281 @@
+ECOMATCH HEALTH AI
+
+MASTER DEVELOPMENT & HACKATHON EXECUTION PROMPT
+
+10Alytics Global Hackathon 2026 | TGPU Innovator Labs
+
+1. ROLE AND MISSION
+
+Act as an elite multidisciplinary product development team consisting of:
+
+* Principal artificial intelligence engineer.
+* Senior data scientist.
+* Machine learning engineer.
+* Healthcare operations specialist.
+* Sustainability and circular economy specialist.
+* Full-stack software architect.
+* Award-winning UI/UX designer.
+* Cloud infrastructure engineer.
+* Cybersecurity engineer.
+* B2B SaaS product strategist.
+* International hackathon competition mentor.
+
+Your mission is to design, develop, test and prepare a complete competition-ready application called EcoMatch Health AI.
+
+Build a sophisticated, functional, data-driven enterprise platform with exceptional visual design and genuine commercial potential.
+
+Do not create a superficial prototype, generic dashboard, static landing page or AI wrapper.
+
+Our objective is to maximise our performance across every official judging criterion and develop a commercially viable product beyond the competition.
+
+2. OFFICIAL COMPETITION CONTEXT
+
+Competition: 10Alytics Global Hackathon 2026.
+
+Selected track: Health.
+
+Primary alignment: United Nations Sustainable Development Goal 12 — Responsible Consumption and Production.
+
+Official Health Track problem statement:
+
+How can healthcare providers increase patient capacity and improve the availability of essential medical supplies while reducing resource wastage, unnecessary procurement, and the environmental impact of healthcare operations?
+
+The competition expects participants to leverage:
+
+* Data analytics.
+* Data science.
+* Artificial intelligence.
+* Software engineering.
+* Digital innovation.
+
+The solution must be practical, measurable, scalable and capable of improving operational efficiency, resource utilisation and environmental sustainability.
+
+3. PRODUCT IDENTITY
+
+Product name: EcoMatch Health AI.
+
+Tagline: Predict Waste. Redistribute Resources. Expand Healthcare Capacity.
+
+Proposed product domain: https://ecomatch.tgpu.tech
+
+Proposed repository: tgpu-ecomatch-health
+
+Product family: TGPU Innovator Labs.
+
+Product category: Healthcare Resource Intelligence and Circular Economy SaaS.
+
+Positioning:
+
+EcoMatch Health AI is an intelligent healthcare resource optimisation platform that predicts medical supply demand, identifies surplus inventory, prevents avoidable waste, optimises procurement and intelligently matches eligible resources between healthcare institutions.
+
+The platform transforms isolated healthcare facilities into a collaborative, sustainable resource network.
+
+4. PROBLEM DEFINITION
+
+Healthcare organisations frequently experience:
+
+* Excess inventory.
+* Unexpected shortages.
+* Expiring medical supplies.
+* Inefficient procurement.
+* Fragmented inventory visibility.
+* Unnecessary operational expenditure.
+* Poor coordination between healthcare facilities.
+* Avoidable environmental waste.
+* Underutilised operational resources.
+* Constraints on patient service capacity.
+
+Develop a platform that addresses these problems through predictive intelligence, explainable AI, mathematical optimisation and collaborative resource redistribution.
+
+Support the problem definition with credible research and documented data sources.
+
+Do not fabricate statistics or cite nonexistent research.
+
+5. CORE INTELLIGENCE ARCHITECTURE
+
+Develop six interconnected intelligence engines.
+
+ENGINE A — Predictive Demand Intelligence
+
+Implement genuine predictive analytics capable of:
+
+* Analysing historical medical supply consumption.
+* Forecasting future demand.
+* Identifying seasonal patterns.
+* Predicting stock depletion.
+* Estimating stockout probability.
+* Identifying expected surplus.
+* Recommending reorder quantities.
+* Displaying forecasting uncertainty where supported.
+
+Compare machine learning performance against a simple moving-average or historical baseline.
+
+Select models based on actual evaluation.
+
+ENGINE B — Waste and Expiry Risk Intelligence
+
+Implement:
+
+* Batch-level expiry tracking.
+* Near-expiry detection.
+* Predicted unused inventory.
+* Waste-risk scoring.
+* Financial exposure estimation.
+* First-expiry-first-out recommendations.
+* Operational urgency classification.
+* Prioritised intervention recommendations.
+
+Every risk score should be explainable.
+
+ENGINE C — Intelligent Resource Matchmaking
+
+Match healthcare facilities with eligible surplus inventory against facilities experiencing predicted shortages.
+
+Consider:
+
+* Medical supply compatibility.
+* Product specifications.
+* Available quantities.
+* Required quantities.
+* Geographic proximity.
+* Remaining shelf life.
+* Storage conditions.
+* Transportation costs.
+* Operational urgency.
+* Facility verification.
+* Regulatory eligibility.
+* Estimated financial savings.
+* Environmental impact.
+
+Generate transparent matching scores between 0 and 100.
+
+Explain the reasoning behind each recommendation.
+
+Apply eligibility checks before calculating match scores.
+
+Never recommend transferring expired, recalled, damaged, restricted or otherwise ineligible products.
+
+Require authorised human approval before any transfer.
+
+Focus the competition prototype on eligible, non-expired medical consumables rather than regulated medicines.
+
+ENGINE D — Prescriptive Optimisation
+
+Develop an optimisation engine capable of recommending:
+
+* Optimal inventory redistribution.
+* Reduced procurement.
+* Improved reorder quantities.
+* Multi-facility stock allocation.
+* Transfer prioritisation.
+* Resource recovery opportunities.
+
+Use suitable mathematical optimisation techniques, such as linear programming, where practical.
+
+Optimisation objectives should include:
+
+* Minimising waste.
+* Minimising procurement expenditure.
+* Minimising transportation costs.
+* Maximising resource availability.
+* Maintaining required safety stock levels.
+
+Compare conventional operations against optimised scenarios.
+
+ENGINE E — Environmental and Economic Impact Intelligence
+
+Calculate measurable indicators including:
+
+* Inventory units potentially rescued.
+* Estimated waste reduction.
+* Avoided procurement expenditure.
+* Financial value recovered.
+* Resource utilisation improvement.
+* Stockout reduction.
+* Waste diverted by weight, where product weight data exists.
+* Estimated avoided emissions, where credible emission factors exist.
+* Potential patient service capacity supported by recovered resources.
+
+Provide transparent formulas, assumptions and methodologies.
+
+Distinguish:
+
+* Actual observed results.
+* Model-generated predictions.
+* Simulated operational outcomes.
+* Estimated environmental benefits.
+
+Do not invent clinical outcomes, financial savings or carbon factors.
+
+ENGINE F — AI Resource Operations Agent
+
+Create an intelligent operational assistant capable of analysing application data.
+
+It should answer questions such as:
+
+* Which medical supplies face the highest waste risk?
+* Which facilities will experience shortages?
+* Which procurement orders could potentially be avoided?
+* Which resource transfers should be prioritised?
+* Why was a particular match recommended?
+* What is the estimated financial impact?
+* What is the potential environmental benefit?
+* How can our organisation improve resource efficiency?
+
+The agent must retrieve relevant application data and provide evidence-backed answers.
+
+It must not operate as a generic chatbot.
+
+Allow the agent to propose actions, generate reports and recommend interventions.
+
+Require human approval for operational changes.
+
+Do not provide clinical diagnosis or treatment advice.
+
+6. COMPLETE APPLICATION MODULES
+
+A. Public website
+
+Develop a premium cinematic product website featuring:
+
+* Exceptional hero section.
+* Interactive resource network visualisation.
+* Healthcare resource problem.
+* Product solution.
+* SDG 12 alignment.
+* AI capabilities.
+* Impact measurement methodology.
+* Interactive product demonstration.
+* Enterprise use cases.
+* Commercial benefits.
+* Login.
+* Public Judge Demo Mode.
+* Project documentation access.
+
+B. Executive Command Centre
+
+Display:
+
+* Total inventory value.
+* Inventory at risk.
+* Predicted shortages.
+* Potential procurement savings.
+* Active resource matches.
+* Inventory waste indicators.
+* Facility performance.
+* Sustainability indicators.
+* Intelligent operational alerts.
+* Recent resource exchange activity.
+
+All metrics must originate from actual application data or clearly labelled demonstration data.
+
+C. Healthcare Facility Network
+
+Implement:
+
+* Hospital and clinic profiles.
+* Regional distribution.
+* Facility verification.
+* Inventory capabilities.
+* Resource requirements.
+* Facility performance indicators.
+* Interactive network visualisations.
+* Geographic mapping.
+* Organisation-level access controls.
+
+D. Inventory Intelligence
+
+Implement:
+
+* Inventory creation and editing.
+* Batch-level inventory management.
+* Expiration tracking.
+* Stock availability.
+* Consumption history.
+* Demand forecasting.
+* Risk classification.
+* CSV import.
+* CSV export.
+* Data validation.
+* Advanced filtering.
+* Search.
+* Actionable alerts.
+
+E. Resource Exchange Marketplace
+
+Implement:
+
+* Surplus resource listings.
+* Supply requests.
+* Intelligent matching recommendations.
+* Compatibility checks.
+* Matching scores.
+* Explainable recommendations.
+* Transfer requests.
+* Approval workflow.
+* Transfer status tracking.
+* Transaction history.
+* Audit records.
+
+F. Predictive Analytics Laboratory
+
+Implement:
+
+* Historical consumption analysis.
+* Forecasting charts.
+* Inventory depletion forecasts.
+* Model performance metrics.
+* Model comparison.
+* Forecast uncertainty.
+* Feature importance where applicable.
+* Data quality indicators.
+* Downloadable analytical results.
+
+G. Sustainability Impact Centre
+
+Implement:
+
+* Environmental impact indicators.
+* Financial impact indicators.
+* Waste reduction metrics.
+* Procurement optimisation.
+* Resource efficiency.
+* Baseline versus optimised performance.
+* Transparent calculation methodology.
+* Exportable sustainability reports.
+
+H. Scenario Simulation Laboratory
+
+Allow users to simulate:
+
+* Unexpected demand increases.
+* Procurement budget reductions.
+* Supply chain disruptions.
+* Near-expiry inventory.
+* Multi-facility redistribution.
+* Alternative procurement strategies.
+
+Display changes in:
+
+* Waste.
+* Procurement costs.
+* Stock availability.
+* Service capacity proxies.
+* Resource utilisation.
+
+I. Administration and Governance
+
+Implement:
+
+* User management.
+* Organisation management.
+* Role-based access.
+* Approval workflows.
+* Data administration.
+* Audit logs.
+* Security controls.
+* Model monitoring.
+* System configuration.
+
+7. DATA SCIENCE REQUIREMENTS
+
+This is a data-driven hackathon. The application must contain credible and reproducible data science work.
+
+Create dedicated directories for:
+
+* Raw datasets.
+* Processed datasets.
+* Data dictionaries.
+* Data cleaning scripts.
+* Exploratory data analysis.
+* Feature engineering.
+* Model training.
+* Model evaluation.
+* Optimisation algorithms.
+* Impact calculations.
+* Reproducibility instructions.
+
+Investigate credible and appropriately licensed public datasets from sources such as:
+
+* World Health Organization.
+* UNICEF Supply Division.
+* World Bank.
+* National open-data portals.
+* Public healthcare procurement records.
+* Public supply chain research datasets.
+
+Verify that each dataset actually exists and supports the proposed methodology.
+
+Document:
+
+* Source URLs.
+* Dataset ownership.
+* Licensing.
+* Collection periods.
+* Relevant variables.
+* Data limitations.
+* Processing methodology.
+
+If suitable real-world operational data is unavailable, create a reproducible synthetic healthcare inventory dataset.
+
+Clearly label all synthetic data throughout the application, documentation, presentation and demonstration.
+
+The dataset should support:
+
+* Multiple healthcare facilities.
+* Medical consumable categories.
+* Product identifiers.
+* Inventory batches.
+* Expiration dates.
+* Historical demand.
+* Procurement costs.
+* Inventory quantities.
+* Storage conditions.
+* Product weights where available.
+* Transfer scenarios.
+* Forecasting experiments.
+
+Do not use identifiable patient data.
+
+Never present synthetic information as genuine hospital records.
+
+8. MACHINE LEARNING METHODOLOGY
+
+Investigate and evaluate suitable approaches, including:
+
+* Moving averages.
+* Exponential smoothing.
+* Regression models.
+* Random forests.
+* Gradient boosting.
+* Time-series forecasting.
+
+Use appropriate chronological training, validation and testing splits.
+
+Prevent data leakage.
+
+Measure performance using suitable metrics, including:
+
+* Mean Absolute Error.
+* Root Mean Squared Error.
+* Weighted Absolute Percentage Error where appropriate.
+* Relevant classification metrics for risk prediction.
+
+Document:
+
+* Baseline performance.
+* Final model selection.
+* Model evaluation.
+* Error analysis.
+* Feature importance where applicable.
+* Model limitations.
+* Training instructions.
+* Inference pipeline.
+
+Save model artifacts where applicable.
+
+The web application must consume genuine model outputs or clearly labelled reproducible precomputed predictions.
+
+Never generate decorative or fabricated model accuracy scores.
+
+9. TECHNICAL ARCHITECTURE
+
+Use the preferred TGPU technology stack where appropriate.
+
+Frontend
+
+* React.
+* TypeScript.
+* Vite.
+* Tailwind CSS.
+* Accessible enterprise-grade component system.
+* Advanced interactive visualisations.
+* Responsive design.
+
+Backend
+
+* Cloudflare Workers.
+* Secure REST APIs.
+* Validated request schemas.
+* Structured error handling.
+* Rate limiting.
+* Appropriate caching.
+
+Database
+
+* Supabase PostgreSQL.
+* Row-level security.
+* Database migrations.
+* Organisation-level data isolation.
+* Secure authentication.
+* Audit trails.
+
+Data science
+
+* Python.
+* Pandas.
+* NumPy.
+* Scikit-learn.
+* SciPy.
+* Jupyter Notebook.
+
+Infrastructure requirements
+
+* GitHub source control.
+* Automated CI/CD.
+* Reproducible builds.
+* Environment variable documentation.
+* Deployment configuration.
+* No hardcoded credentials.
+
+If Python inference cannot run directly within Cloudflare Workers, implement compatible inference or consume reproducibly generated predictions.
+
+Document the actual system architecture.
+
+Do not claim disconnected models are performing live inference.
+
+Provide a self-contained local demonstration fallback.
+
+Use existing subscriptions, free tiers and startup credits.
+
+Do not introduce additional charges without explicit approval.
+
+10. AUTHENTICATION AND SECURITY
+
+Support:
+
+* Google OAuth through Supabase where configured.
+* Email authentication.
+* Founder and administrator roles.
+* Healthcare facility managers.
+* Inventory managers.
+* Procurement officers.
+* Sustainability analysts.
+* Read-only reviewers.
+* Public isolated Judge Demo Mode.
+
+Implement:
+
+* Server-side authorisation.
+* Row-level security.
+* Organisation data isolation.
+* Input validation.
+* Secure secrets management.
+* Rate limiting.
+* Audit logs.
+* Transfer approval requirements.
+* Appropriate security headers.
+
+Never expose service-role credentials or administrative privileges to public visitors.
+
+Public demonstration access must not compromise production data or infrastructure.
+
+11. EXCEPTIONAL VISUAL DESIGN
+
+Create an application with outstanding visual quality comparable to premium international enterprise SaaS products.
+
+Apply the same level of cinematic craftsmanship expected from high-end Framer websites while preserving practical operational usability.
+
+Design direction:
+
+* Deep midnight navy.
+* Emerald and teal sustainability accents.
+* Premium white and neutral surfaces.
+* Sophisticated typography.
+* Cinematic gradients used selectively.
+* Refined glass effects where appropriate.
+* Elegant transitions.
+* Purposeful animations.
+* Premium iconography.
+* Professional charts.
+* Exceptional information hierarchy.
+
+Include:
+
+* Animated global resource network.
+* Interactive facility connections.
+* Resource movement visualisations.
+* AI matching animations.
+* Advanced forecasting charts.
+* Inventory risk heatmaps.
+* Premium tables.
+* Executive KPI cards.
+* Responsive mobile layouts.
+* Light and dark modes.
+* Accessible contrast.
+* Loading states.
+* Empty states.
+* Error states.
+
+Design must be:
+
+* Premium.
+* Credible.
+* Modern.
+* Distinctive.
+* Accessible.
+* Operationally useful.
+* Fast.
+
+Avoid generic AI-generated dashboard templates, excessive visual clutter and decorative features that do not support user tasks.
+
+Use a unique EcoMatch Health AI brand identity.
+
+Do not use default framework logos or favicons.
+
+12. PUBLIC JUDGE DEMO MODE
+
+Create a prominent public button called Explore Live Demo.
+
+Judges must be able to experience the complete operational workflow without creating an account, obtaining credentials or configuring external services.
+
+Develop a guided scenario involving two or more healthcare facilities.
+
+Example:
+
+Facility A has eligible medical consumables forecast to remain unused before expiration.
+
+Facility B has a predicted shortage of compatible supplies.
+
+The demonstration must:
+
+1. Analyse historical consumption.
+2. Detect Facility A’s predicted surplus.
+3. Detect Facility B’s predicted shortage.
+4. Calculate potential inventory waste.
+5. Identify eligible matching supplies.
+6. Generate an explainable matching score.
+7. Recommend an optimised transfer quantity.
+8. Present a human approval workflow.
+9. Simulate the approved transfer.
+10. Compare conventional procurement against redistribution.
+11. Calculate potential financial and environmental benefits.
+12. Update the executive dashboard.
+
+Allow judges to reset the demonstration.
+
+Use transparent, reproducible calculations.
+
+Clearly identify all simulated data and outcomes.
+
+Ensure public demonstration operations cannot alter real production records.
+
+13. OFFICIAL JUDGING CRITERIA
+
+Develop and evaluate the project against the following official criteria.
+
+Problem Relevance and Understanding — 20%
+
+* Clearly define the healthcare resource problem.
+* Demonstrate understanding of the selected Health Track.
+* Explain direct SDG 12 alignment.
+* Support the problem with credible evidence.
+* Identify the actual operational users and beneficiaries.
+
+Innovation and Creativity — 20%
+
+* Combine forecasting, waste prediction, explainable matchmaking and optimisation.
+* Demonstrate why the approach is different from conventional inventory dashboards.
+* Provide a complete resource recovery workflow.
+* Explain the innovation clearly.
+
+Technical Implementation — 20%
+
+* Deliver a genuinely functional application.
+* Implement reproducible data science.
+* Demonstrate machine learning evaluation.
+* Integrate model outputs into application workflows.
+* Implement reliable security controls.
+* Include automated tests.
+
+Impact and Scalability — 20%
+
+* Calculate measurable environmental and operational indicators.
+* Compare baseline and optimised scenarios.
+* Explain limitations and assumptions.
+* Demonstrate potential multi-facility scalability.
+* Explain commercial sustainability.
+
+User Experience and Product Design — 10%
+
+* Deliver outstanding visual quality.
+* Make complex data intuitive.
+* Provide exceptional user journeys.
+* Ensure mobile responsiveness and accessibility.
+* Make the demonstration easy to understand.
+
+Presentation and Pitch — 10%
+
+* Prepare a convincing executive narrative.
+* Explain the problem and why it matters.
+* Demonstrate the working solution.
+* Present technical evidence.
+* Communicate realistic impact and scalability.
+
+Target the highest possible marks without inventing evidence or claiming unverified results.
+
+14. OFFICIAL COMPETITION DELIVERABLES
+
+Prepare the following submission package wherever applicable.
+
+1. Project proposal.
+2. Raw and processed datasets.
+3. Jupyter Notebook and Python scripts.
+4. Trained machine learning model.
+5. Interactive analytics dashboard.
+6. Working software application.
+7. Public GitHub repository with comprehensive README.
+8. Environmental and operational impact assessment.
+9. Final presentation deck compiled into one PDF.
+10. Short demonstration video strictly capped at 10 MB.
+
+Generate actual deliverables wherever the development environment supports them.
+
+Never create empty placeholders and claim they are completed artifacts.
+
+Maintain a submission manifest identifying completed, outstanding and blocked deliverables.
+
+15. MANDATORY PUBLIC ACCESSIBILITY
+
+The competition requires all deliverables, analysis, scripts and visualisations to be publicly accessible.
+
+Prepare a dedicated public competition repository.
+
+All public deliverables must be accessible without authentication barriers.
+
+However:
+
+* Do not expose existing proprietary TGPU repositories.
+* Do not publish private business information.
+* Do not publish confidential partner information.
+* Do not expose API credentials.
+* Do not publish sensitive infrastructure configurations.
+* Do not expose production databases.
+* Do not publish personal or patient information.
+
+Verify dataset redistribution rights before including datasets in the public repository.
+
+Where redistribution is prohibited, provide legitimate source links and reproducible acquisition instructions.
+
+Prepare the repository for public release and obtain authorisation before changing repository visibility or publishing organisational intellectual property.
+
+16. COMPREHENSIVE README
+
+Create a professional README.md containing:
+
+* Project name and branding.
+* Registered team name and contributors.
+* Competition information.
+* Health Track problem statement.
+* SDG 12 alignment.
+* Product overview.
+* Key innovations.
+* Application screenshots.
+* Public demonstration link.
+* Architecture diagram.
+* Technology stack.
+* Installation instructions.
+* Environment variable requirements.
+* Deployment instructions.
+* Dataset sources.
+* Dataset licensing.
+* Data science methodology.
+* Machine learning evaluation.
+* Optimisation methodology.
+* Impact calculations.
+* Automated testing instructions.
+* Security considerations.
+* Known limitations.
+* Competition artifact links.
+* Intellectual property and code reuse disclosures.
+* Future development roadmap.
+
+The README must allow judges to understand, reproduce and evaluate the project.
+
+17. REPOSITORY STRUCTURE
+
+Create a professional repository structure similar to:
+
+tgpu-ecomatch-health/
+  src/
+    components/
+    pages/
+    features/
+    services/
+    hooks/
+    types/
+  server/
+    api/
+    middleware/
+    services/
+  data/
+    raw/
+    processed/
+    synthetic/
+    README.md
+    data_dictionary.csv
+  notebooks/
+    01_exploratory_analysis.ipynb
+    02_feature_engineering.ipynb
+    03_model_training.ipynb
+    04_model_evaluation.ipynb
+    05_optimisation.ipynb
+    06_impact_assessment.ipynb
+  scripts/
+    data_preparation/
+    training/
+    inference/
+    optimisation/
+  models/
+  supabase/
+    migrations/
+  tests/
+  docs/
+    project-proposal.md
+    architecture.md
+    methodology.md
+    impact-assessment.md
+    security.md
+    deployment.md
+    competition-compliance.md
+  submission/
+    submission-manifest.json
+  public/
+  .github/
+    workflows/
+  README.md
+  LICENSE
+  package.json
+  package-lock.json
+  requirements.txt
+  wrangler.toml
+  .env.example
+  .gitignore
+
+Adapt this structure where technically appropriate.
+
+Include a valid dependency lockfile.
+
+Ensure npm ci, build, type checking and automated tests work reliably.
+
+18. STRICT 12-SLIDE PITCH PRESENTATION
+
+Official competition rules require:
+
+* A single compiled PDF file.
+* No more than 12 slides.
+* High-level executive conclusions.
+* Registered team name and names of all contributing team members on the title slide.
+
+Use the following structure:
+
+Slide 1 — Title
+
+EcoMatch Health AI.
+
+Include registered team name, actual contributors and competition details.
+
+Slide 2 — The Problem
+
+Explain healthcare resource wastage, shortages and inefficient procurement.
+
+Slide 3 — Evidence and SDG 12
+
+Present credible evidence and sustainability alignment.
+
+Slide 4 — The Solution
+
+Introduce EcoMatch Health AI and its primary value proposition.
+
+Slide 5 — Innovation
+
+Explain predictive intelligence, matchmaking and prescriptive optimisation.
+
+Slide 6 — Data and Analysis
+
+Present dataset sources, data preparation and meaningful findings.
+
+Slide 7 — Machine Learning
+
+Explain methodology, baseline comparisons and verified model evaluation.
+
+Slide 8 — Technical Architecture
+
+Present application architecture and implementation.
+
+Slide 9 — Working Demonstration
+
+Show the actual end-to-end product workflow.
+
+Slide 10 — Measurable Impact
+
+Present validated or simulated economic and environmental impact.
+
+Slide 11 — Scalability and Commercial Sustainability
+
+Explain expansion across healthcare networks, commercial opportunities and implementation roadmap.
+
+Slide 12 — Conclusion
+
+Summarise the solution and include public application and repository access links.
+
+Produce an exceptional visual presentation.
+
+Export the final deck as a single PDF.
+
+Maintain an editable source presentation where supported.
+
+Do not invent registered team names or contributor details.
+
+19. DEMONSTRATION VIDEO
+
+Produce a professional short demonstration video.
+
+Mandatory requirements:
+
+* MP4, MOV or MKV.
+* Maximum file size: 10 MB.
+* Genuine application footage.
+* Clear explanation of the solution.
+* Complete operational user journey.
+
+Preferred duration: approximately 60–90 seconds, subject to final competition requirements.
+
+Suggested narrative:
+
+1. Introduce the healthcare resource problem.
+2. Introduce EcoMatch Health AI.
+3. Demonstrate inventory intelligence.
+4. Demonstrate predictive analytics.
+5. Demonstrate intelligent matching.
+6. Demonstrate the approval and redistribution workflow.
+7. Present estimated or measured impact.
+8. Conclude with SDG 12 alignment.
+
+Use professional narration, readable captions and clean transitions where supported.
+
+Verify the actual final file size.
+
+Target below 9.5 MB to provide a safety margin.
+
+If video rendering is unavailable, prepare the complete narration script, storyboard, recording sequence and encoding specifications. Report the video as outstanding rather than completed.
+
+20. OFFICIAL LMS SUBMISSION PREPARATION
+
+Projects must be submitted through the 10Alytics LMS Hackathon Portal.
+
+The confirmed submission process is:
+
+1. Login to the LMS portal.
+2. Open the Hackathon section.
+3. Select Submit Project.
+4. Complete all required details.
+5. Upload supporting deliverables.
+6. Achieve 100% submission completion.
+7. Submit before the official deadline.
+
+Prepare a submission-ready document containing the following fields.
+
+Project name
+
+EcoMatch Health AI.
+
+One-line problem statement
+
+Healthcare facilities waste valuable medical supplies while other facilities experience shortages due to inefficient forecasting, procurement and resource allocation.
+
+Project description
+
+EcoMatch Health AI is an intelligent healthcare resource optimisation platform combining predictive analytics, machine learning, explainable resource matchmaking and sustainability measurement to reduce medical supply waste, optimise procurement and improve resource availability across healthcare institutions.
+
+Competition alignment
+
+Health Track — United Nations SDG 12: Responsible Consumption and Production.
+
+Additional submission information
+
+Prepare:
+
+* Project summary.
+* Problem statement.
+* Project objectives.
+* Methodology.
+* Innovation explanation.
+* Technical architecture.
+* Dataset information.
+* Machine learning results.
+* Environmental impact.
+* Economic impact.
+* Scalability.
+* Registered team information.
+* Contributor information.
+* Public GitHub URL.
+* Public application URL.
+* Dataset access links.
+* Presentation PDF.
+* Demonstration video.
+* Supporting documentation.
+
+Do not fabricate URLs or claim unverified deployment.
+
+Ensure all submission content is consistent with the actual implementation.
+
+The submission portal automatically locks at the deadline.
+
+No late submissions are accepted.
+
+Do not assume illustrative dates shown in briefing screenshots represent the actual competition deadline.
+
+21. COMMERCIAL BUSINESS MODEL
+
+Design EcoMatch Health AI as a commercially viable B2B SaaS product.
+
+Potential customers:
+
+* Hospitals.
+* Private healthcare groups.
+* Clinics.
+* Medical distributors.
+* Healthcare procurement organisations.
+* Humanitarian organisations.
+* Public healthcare networks.
+
+Potential commercial models:
+
+* Facility subscription.
+* Enterprise network subscription.
+* Procurement intelligence modules.
+* Sustainability reporting modules.
+* Approved resource exchange services.
+* Enterprise implementation and support.
+
+Prepare a credible pilot roadmap.
+
+Phase 1: Isolated demonstration and validation.
+
+Phase 2: Pilot with participating healthcare facilities.
+
+Phase 3: Multi-facility operational integration.
+
+Phase 4: Regional healthcare resource intelligence network.
+
+Do not implement real payment collection during the hackathon without approval.
+
+Do not claim existing healthcare customers or confirmed commercial partnerships unless verified.
+
+22. EXISTING TGPU APPLICATIONS AND INTELLECTUAL PROPERTY
+
+TGPU has an existing application ecosystem, including MatchOS and healthcare-related products.
+
+EcoMatch Health AI must remain a separate competition project.
+
+Preserve all existing TGPU applications, infrastructure, databases and domains.
+
+Before reusing any existing source code:
+
+* Verify competition rules.
+* Confirm reuse eligibility.
+* Document component provenance.
+* Distinguish existing components from newly developed work.
+* Obtain authorisation where required.
+
+If existing code reuse is prohibited or unconfirmed, implement the competition application independently.
+
+Do not conceal pre-existing code usage.
+
+Do not expose MatchOS or other proprietary TGPU applications.
+
+Maintain transparent development history.
+
+23. TESTING AND QUALITY ASSURANCE
+
+Implement and execute:
+
+* Unit tests.
+* API tests.
+* Integration tests.
+* Authentication tests.
+* Organisation isolation tests.
+* Input validation tests.
+* Forecasting evaluation tests.
+* Matching algorithm tests.
+* Optimisation tests.
+* Impact calculation tests.
+* Security checks.
+* Mobile responsiveness tests.
+* End-to-end Judge Demo Mode tests.
+
+Validate:
+
+* Every navigation route.
+* Every operational button.
+* Every form.
+* Every displayed calculation.
+* Every data visualisation.
+* Every AI-generated recommendation.
+* Every approval workflow.
+* Every export feature.
+* Public demo accessibility.
+
+Ensure:
+
+* No broken links.
+* No dead buttons.
+* No placeholder operational features presented as working.
+* No exposed credentials.
+* No fabricated analytics.
+* No misleading model performance claims.
+* No unrestricted administrator access.
+* No production data exposure.
+
+Test the responsive interface across mobile, tablet and desktop widths.
+
+24. DEVELOPMENT PRIORITIES
+
+Do not sacrifice technical reliability for feature quantity.
+
+P0 — Critical competition MVP
+
+Complete first:
+
+* Reproducible dataset.
+* Inventory intelligence.
+* Demand forecasting.
+* Expiry-risk prediction.
+* Intelligent resource matching.
+* Optimised redistribution.
+* Baseline comparison.
+* Transparent impact calculation.
+* Public Judge Demo Mode.
+
+This must form a complete functional vertical slice.
+
+P1 — Competition evidence
+
+Complete:
+
+* Exploratory data analysis.
+* Model training and evaluation.
+* Optimisation methodology.
+* Data science notebooks.
+* Impact assessment.
+* Documentation.
+* Automated tests.
+
+P2 — Product excellence
+
+Complete:
+
+* Cinematic public website.
+* Premium executive dashboard.
+* Advanced visualisations.
+* Facility network.
+* AI operations assistant.
+* Administration.
+* Responsive product experience.
+
+P3 — Final submission package
+
+Complete:
+
+* Public repository preparation.
+* Application deployment.
+* Public accessibility verification.
+* 12-slide presentation PDF.
+* Demonstration video below 10 MB.
+* Submission information.
+* Submission manifest.
+
+If time is constrained, complete P0 and P1 before expanding secondary features.
+
+25. SUBMISSION MANIFEST
+
+Create a structured submission manifest tracking:
+
+* Deliverable name.
+* File location.
+* Public URL.
+* File size.
+* Completion status.
+* Validation status.
+* Known limitations.
+* Outstanding action.
+
+Use the following statuses:
+
+* Not started.
+* In progress.
+* Implemented.
+* Tested.
+* Verified.
+* Ready for submission.
+* Submitted.
+
+Never mark an item verified without actual evidence.
+
+Prepare a final submission readiness report showing all remaining blockers.
+
+26. FINAL ACCEPTANCE CRITERIA
+
+The project is competition-ready only when:
+
+* The core application workflow is functional.
+* Dataset provenance is documented.
+* Analysis is reproducible.
+* Machine learning performance is evaluated.
+* Matching recommendations are explainable.
+* Optimisation calculations are correct.
+* Impact estimates are transparent.
+* Public Judge Demo Mode works.
+* Automated tests pass.
+* Public deliverables are accessible.
+* The README explains deployment.
+* The presentation contains no more than 12 slides.
+* The presentation is compiled into one PDF.
+* The demo video is below 10 MB.
+* Actual team information is included.
+* No sensitive information is exposed.
+* All required LMS submission fields are prepared.
+* Competition integrity requirements are satisfied.
+
+27. FINAL EXECUTION COMMAND
+
+Start implementing EcoMatch Health AI immediately.
+
+Do not respond with only a conceptual design, proposed architecture or development plan.
+
+Build the actual application.
+
+Generate:
+
+* Functional project structure.
+* Complete source code.
+* Reproducible demonstration dataset.
+* Data science scripts.
+* Jupyter Notebooks.
+* Machine learning pipeline.
+* Optimisation engine.
+* Explainable matching algorithm.
+* Sustainability impact calculations.
+* Interactive dashboards.
+* Public demonstration experience.
+* Automated tests.
+* Deployment configuration.
+* Comprehensive documentation.
+* Competition submission materials.
+
+Use sensible technical defaults for nonessential missing information.
+
+Where competition rules, credentials, team information, deadlines or infrastructure permissions remain unconfirmed, continue safely using an isolated standalone demonstration environment and document the outstanding requirement.
+
+Do not incur additional costs.
+
+Do not disrupt existing TGPU infrastructure.
+
+Do not fabricate progress or validation results.
+
+Prioritise genuine working intelligence, meaningful evidence, professional design and measurable operational impact.
+
+Build EcoMatch Health AI as a serious international healthcare resource intelligence SaaS platform capable of competing at the highest level of the 10Alytics Global Hackathon 2026.
+
+EXECUTE NOW.

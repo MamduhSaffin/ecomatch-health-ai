@@ -1,0 +1,11 @@
+sku,name,category,unit_label,unit_cost_usd,unit_weight_kg,storage_condition,shelf_life_months,regulated_medicine,emission_factor_kg_co2_per_kg,patient_episodes_per_unit
+SKU-IVS-020,Sterile IV Infusion Sets (20 drops/mL),Infusion & Vascular,Box of 50,34.0,0.85,sterile_dry,24,False,2.65,50
+SKU-GLV-100,Nitrile Examination Gloves (Powder-Free),PPE & Barrier,Box of 100,11.5,0.42,ambient_15_25C,36,False,2.85,50
+SKU-HYD-020,Hydrocolloid Sterile Wound Dressings,Wound & Surgical,Box of 20,46.0,0.38,sterile_dry,24,False,2.55,20
+SKU-SYR-005,Disposable 5mL Luer-Lock Syringes,Infusion & Vascular,Box of 100,14.8,0.65,ambient_15_25C,36,False,2.7,100
+SKU-MSK-IIR,Surgical Face Masks (Type IIR),PPE & Barrier,Box of 50,8.2,0.24,ambient_15_25C,24,False,2.6,50
+SKU-EDT-100,Venous Blood Collection Tubes (EDTA),Diagnostics & Lab,Rack of 100,22.5,0.72,temp_4_25C,18,False,2.65,100
+SKU-GAZ-100,Sterile Non-Woven Gauze Swabs (10x10cm),Wound & Surgical,Pack of 100,9.4,0.31,sterile_dry,36,False,2.2,50
+SKU-USG-048,Sterile Ultrasound Transmission Gel Packets,Diagnostics & Lab,Box of 48,28.6,1.15,ambient_15_25C,24,False,2.35,48
+SKU-INT-010,Disposable Endotracheal Intubation Kits,Airway & Emergency,Case of 10,112.0,1.4,sterile_dry,24,False,2.9,10
+SKU-GLU-050,Point-of-Care Glucometer Test Strips,Diagnostics & Lab,Vial of 50,19.5,0.09,controlled_2_30C,15,False,2.5,50

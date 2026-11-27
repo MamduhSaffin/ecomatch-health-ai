@@ -1,0 +1,39 @@
+{
+  "project": "EcoMatch Health AI",
+  "competition": "10Alytics Global Hackathon 2026 \u2014 Health Track (UN SDG 12)",
+  "dataset_provenance": "Reproducible Synthetic Healthcare Consumables Dataset (Seed 20261012)",
+  "split_protocol": {
+    "train_weeks": 72,
+    "validation_weeks": 16,
+    "holdout_test_weeks": 16,
+    "leakage_guard": true
+  },
+  "series_evaluated": 80,
+  "total_consumption_records": 8320,
+  "models": [
+    {
+      "model_id": "moving_avg_4w",
+      "model_name": "4-Week Moving Average (Baseline)",
+      "avg_test_mae": 3.73,
+      "avg_test_rmse": 4.59,
+      "avg_test_wape_pct": 8.06,
+      "selected_series_count": 21
+    },
+    {
+      "model_id": "holt_winters",
+      "model_name": "Holt-Winters Seasonal Smoothing",
+      "avg_test_mae": 4.47,
+      "avg_test_rmse": 5.48,
+      "avg_test_wape_pct": 10.27,
+      "selected_series_count": 9
+    },
+    {
+      "model_id": "ridge_lag_fourier",
+      "model_name": "Ridge Regression (Lag + Fourier)",
+      "avg_test_mae": 3.31,
+      "avg_test_rmse": 4.08,
+      "avg_test_wape_pct": 7.44,
+      "selected_series_count": 50
+    }
+  ]
+}

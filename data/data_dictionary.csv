@@ -1,0 +1,8 @@
+table,column,type,description,provenance
+facilities.csv,facility_id,string,Unique facility identifier (FAC-001..FAC-008),Synthetic
+facilities.csv,bed_count,integer,Licensed inpatient bed capacity proxy for demand scale,Synthetic
+products.csv,sku,string,Non-regulated medical consumable SKU code,Synthetic
+products.csv,unit_weight_kg,float,Packaged consumable weight in kilograms for waste & CO2e accounting,Calibrated Estimate
+products.csv,emission_factor_kg_co2_per_kg,float,Cradle-to-gate polymer + clinical disposal factor (2.20-2.90 kg CO2e/kg),EPA WARM / HCWH Range
+weekly_consumption.csv,week_index,integer,"Chronological week index 1..104 (Train 1-72, Val 73-88, Test 89-104)",Synthetic Seed 20261012
+weekly_consumption.csv,units_consumed,integer,Weekly facility consumption volume in pack units,Synthetic Seed 20261012

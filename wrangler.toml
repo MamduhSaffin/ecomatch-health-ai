@@ -1,0 +1,7 @@
+# Optional Cloudflare Workers deployment configuration template (fill secrets via `wrangler secret put`)
+name = "tgpu-ecomatch-health"
+compatibility_date = "2026-11-01"
+pages_build_output_dir = "dist"
+
+[vars]
+APP_ENV = "production"

@@ -1,0 +1,119 @@
+{
+  "projectName": "EcoMatch Health AI",
+  "competition": "10Alytics Global Hackathon 2026",
+  "track": "Health",
+  "sdgAlignment": "United Nations SDG 12 — Responsible Consumption and Production",
+  "generatedAt": "2026-11-27T11:30:00Z",
+  "deliverables": [
+    {
+      "id": "DEL-01",
+      "name": "Working Full-Stack Software Application & Public Judge Demo Mode",
+      "fileLocation": "src/ & server.ts",
+      "publicUrl": "Pending public deployment confirmation",
+      "fileSizeBytes": null,
+      "completionStatus": "Tested",
+      "validationStatus": "Verified cleanly via `npm run lint`, `npm run build`, and `bun audit` (0 vulnerabilities)",
+      "knownLimitations": "Runs self-contained in-memory store with Supabase PostgreSQL RLS migration ready for external DB attachment.",
+      "outstandingAction": "Publish live public URL prior to LMS submission."
+    },
+    {
+      "id": "DEL-02",
+      "name": "Reproducible Synthetic Datasets & Data Dictionary",
+      "fileLocation": "data/synthetic/ & data/data_dictionary.csv",
+      "publicUrl": "Included in repository",
+      "fileSizeBytes": null,
+      "completionStatus": "Verified",
+      "validationStatus": "Generated via scripts/run_pipeline.py (8,320 weekly records)",
+      "knownLimitations": "Synthetic operational data (seed 20261012); transparently labelled across UI and docs.",
+      "outstandingAction": "None for local repo; publish via public GitHub repository."
+    },
+    {
+      "id": "DEL-03",
+      "name": "Python Data Science Scripts & 6 Jupyter Notebooks",
+      "fileLocation": "scripts/run_pipeline.py & notebooks/01–06_*.ipynb",
+      "publicUrl": "Included in repository",
+      "fileSizeBytes": null,
+      "completionStatus": "Verified",
+      "validationStatus": "Executed Python pipeline cleanly with exit code 0",
+      "knownLimitations": "Pure-stdlib Python pipeline used in container; optional pandas/scipy dependencies listed in requirements.txt.",
+      "outstandingAction": "Optional: re-execute notebooks in JupyterLab with plots rendered."
+    },
+    {
+      "id": "DEL-04",
+      "name": "Trained ML Evaluation Report Artifact",
+      "fileLocation": "models/evaluation_report.json",
+      "publicUrl": "Included in repository",
+      "fileSizeBytes": null,
+      "completionStatus": "Verified",
+      "validationStatus": "Verified 80-series holdout WAPE (Ridge 7.44% vs Baseline 8.06%)",
+      "knownLimitations": "Linear/additive forecasting models evaluated on synthetic seasonal demand.",
+      "outstandingAction": "None."
+    },
+    {
+      "id": "DEL-05",
+      "name": "Automated Unit, Engine, Guardrail & Auth Test Suite",
+      "fileLocation": "tests/engines.test.ts",
+      "publicUrl": "Included in repository",
+      "fileSizeBytes": null,
+      "completionStatus": "Verified",
+      "validationStatus": "7/7 Vitest tests passed cleanly via `npm test`",
+      "knownLimitations": "Covers core 6 engines, eligibility gates, clinical refusal, and scrypt/Bearer auth.",
+      "outstandingAction": "None."
+    },
+    {
+      "id": "DEL-06",
+      "name": "PostgreSQL Multi-Tenant Schema & RLS Migration",
+      "fileLocation": "supabase/migrations/001_initial_schema.sql",
+      "publicUrl": "Included in repository",
+      "fileSizeBytes": null,
+      "completionStatus": "Implemented",
+      "validationStatus": "SQL schema authored; external Supabase provisioning pending credentials",
+      "knownLimitations": "Not connected to live external Supabase project without user credentials.",
+      "outstandingAction": "Apply migration when deploying to Supabase."
+    },
+    {
+      "id": "DEL-07",
+      "name": "Comprehensive README & LMS Submission Pack",
+      "fileLocation": "README.md & docs/lms-submission-pack.md",
+      "publicUrl": "Pending public GitHub repository",
+      "fileSizeBytes": null,
+      "completionStatus": "Implemented",
+      "validationStatus": "Complete except confirmed team names & live public URLs",
+      "knownLimitations": "Team member names and live GitHub/App URLs intentionally left unfabricated.",
+      "outstandingAction": "Fill official registered team name, contributor names, and verified public URLs."
+    },
+    {
+      "id": "DEL-08",
+      "name": "12-Slide Executive Pitch Presentation (PDF)",
+      "fileLocation": "docs/pitch-deck-12-slides.md",
+      "publicUrl": "Outstanding PDF export",
+      "fileSizeBytes": null,
+      "completionStatus": "In progress",
+      "validationStatus": "12-slide Markdown source authored; compiled PDF not yet exported",
+      "knownLimitations": "PDF export and final team title slide names pending.",
+      "outstandingAction": "Add verified team names and compile into single ≤12-slide PDF."
+    },
+    {
+      "id": "DEL-09",
+      "name": "Demonstration Video (Strictly < 10 MB MP4)",
+      "fileLocation": "docs/demo-video-storyboard.md",
+      "publicUrl": "Outstanding video recording",
+      "fileSizeBytes": null,
+      "completionStatus": "Not started",
+      "validationStatus": "75s storyboard, narration script, and FFmpeg <9.5MB spec prepared",
+      "knownLimitations": "Headless container cannot record narrated live browser footage.",
+      "outstandingAction": "Record 75s walkthrough of Judge Demo Mode, compress via FFmpeg spec, verify <10MB."
+    },
+    {
+      "id": "DEL-10",
+      "name": "Official 10Alytics LMS Submission & Public Voting Link",
+      "fileLocation": "docs/lms-submission-pack.md",
+      "publicUrl": "Pending official 10Alytics portal",
+      "fileSizeBytes": null,
+      "completionStatus": "Not started",
+      "validationStatus": "Awaiting user LMS upload",
+      "knownLimitations": "Portal submission requires authenticated team participant.",
+      "outstandingAction": "Upload final deliverables to 10Alytics LMS before official deadline."
+    }
+  ]
+}
