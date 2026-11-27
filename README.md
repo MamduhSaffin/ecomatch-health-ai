@@ -3,9 +3,11 @@
 **Predict Waste. Redistribute Resources. Expand Healthcare Capacity.**
 
 - **Competition**: 10Alytics Global Hackathon 2026 — Health Track
-- **Primary Alignment**: United Nations Sustainable Development Goal 12 — Responsible Consumption and Production (Targets 12.3 & 12.5)
-- **Product Family**: TGPU Innovator Labs (Standalone competition repository: `tgpu-ecomatch-health`)
-- **Registered Team & Contributors**: *[Pending final registered team name and verified contributor list prior to LMS submission]*
+- **Primary Alignment**: United Nations Sustainable Development Goal 12 — Responsible Consumption and Production (Target 12.5)
+- **Product Family**: TGPU Innovator Labs (Standalone competition repository: `ecomatch-health-ai`)
+- **Proposed Team**: Nexus Intelligence (registration pending confirmation)
+- **Team members**: Muhammad Mamduh Saffin, Michael Alkali, Muhammad Mukhtaar Suleiman
+- **Proposed deployment**: https://ecomatch.tgpu.tech (not yet verified)
 
 ---
 
@@ -81,7 +83,7 @@ Configure optional environment variables using `.env.example` (never commit real
 - **Public Judge Demo Isolation**: Public visitors clicking **Explore Live Demo** interact exclusively with a dedicated sandbox store (`X-EcoMatch-Demo: true`) that can never alter production records or access administrative privileges.
 - **No Fabricated Claims**: All synthetic data is transparently labelled throughout the UI, exports, and documentation.
 - **Official Voting Integrity**: Community voting occurs exclusively on the official 10Alytics competition platform. Zero simulated voting or artificial engagement exists.
-- **IP & Code Reuse Disclosure**: Built independently as a standalone competition application (`tgpu-ecomatch-health`); zero proprietary TGPU / MatchOS source code, credentials, or production databases are exposed.
+- **IP & Code Reuse Disclosure**: Built independently as a standalone competition application (`ecomatch-health-ai`); zero proprietary TGPU / MatchOS source code, credentials, or production databases are exposed.
 
 ---
 
