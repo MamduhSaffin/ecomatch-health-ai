@@ -409,7 +409,7 @@ export function createApiApp() {
       impact,
       modelBenchmark: benchmark,
       auditLogs: store.auditLogs.slice(0, 60),
-      users: actor.role === 'founder_admin' || isDemo ? listRegisteredUsers() : [],
+      users: !isDemo && actor.role === 'founder_admin' ? listRegisteredUsers() : [],
     });
   });
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { AuthModal } from './components/AuthModal';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
+const AuthModal = lazy(() => import('./components/AuthModal').then(module => ({ default: module.AuthModal })));
 import { PublicShowcasePage } from './pages/PublicShowcasePage';
-import { WorkspaceLayout } from './pages/WorkspaceLayout';
+const WorkspaceLayout = lazy(() => import('./pages/WorkspaceLayout').then(module => ({ default: module.WorkspaceLayout })));
 import { setAuthSession, type AuthUserClient } from './services/api';
 
 export function App() {
@@ -43,7 +43,7 @@ export function App() {
   void authUser;
 
   return (
-    <>
+    <Suspense fallback={<div role="status" className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#08101E] text-slate-700 dark:text-slate-200">Loading EcoMatch…</div>}>
       {view === 'public' ? (
         <PublicShowcasePage
           darkMode={darkMode}
@@ -62,13 +62,13 @@ export function App() {
         />
       )}
 
-      <AuthModal
+      {authModalOpen && <AuthModal
         open={authModalOpen}
         onClose={() => setAuthModalOpen(false)}
         onAuthenticated={handleAuthenticated}
         onEnterDemo={handleExploreDemo}
-      />
-    </>
+      />}
+    </Suspense>
   );
 }
 
