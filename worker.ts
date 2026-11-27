@@ -1,4 +1,4 @@
-import { httpServerHandler } from 'cloudflare:node';
+import { handleAsNodeRequest } from 'cloudflare:node';
 import express from 'express';
 import manifest from './submission/submission-manifest.json';
 import { z } from 'zod';
@@ -747,13 +747,34 @@ export function createApiApp() {
 }
 
 
-const app = createApiApp();
-app.listen(3000);
-const handler = httpServerHandler({ port: 3000 });
-export default { async fetch(request: Request, env: { ASSETS: { fetch(request: Request): Promise<Response> } }, ctx: any) {
- const url = new URL(request.url);
- if (!url.pathname.startsWith('/api/')) return env.ASSETS.fetch(request);
- if (url.pathname.startsWith('/api/auth/') && request.method !== 'GET') return Response.json({error:'Authenticated production workspace is disabled in the public competition preview.'},{status:403});
- if (!['/api/health','/api/submission/manifest','/api/auth/status'].includes(url.pathname) && request.headers.get('x-ecomatch-demo') !== 'true' && url.searchParams.get('demo') !== 'true') return Response.json({error:'Use the public Judge Demo.'},{status:403});
- return handler.fetch(request, env, ctx);
-} };
+const API_PORT = 3000;
+createApiApp().listen(API_PORT);
+
+interface WorkerBindings {
+  ASSETS: { fetch(request: Request): Promise<Response> };
+}
+
+const publicApiPaths = new Set(['/api/health', '/api/submission/manifest', '/api/auth/status']);
+
+export default {
+  async fetch(request: Request, env: WorkerBindings): Promise<Response> {
+    const url = new URL(request.url);
+    if (!url.pathname.startsWith('/api/')) {
+      return env.ASSETS.fetch(request);
+    }
+
+    if (url.pathname.startsWith('/api/auth/') && request.method !== 'GET') {
+      return Response.json(
+        { error: 'Authenticated production workspace is disabled in the public competition preview.' },
+        { status: 403 },
+      );
+    }
+
+    const isDemo = request.headers.get('x-ecomatch-demo') === 'true' || url.searchParams.get('demo') === 'true';
+    if (!publicApiPaths.has(url.pathname) && !isDemo) {
+      return Response.json({ error: 'Use the public Judge Demo.' }, { status: 403 });
+    }
+
+    return handleAsNodeRequest(API_PORT, request);
+  },
+};
