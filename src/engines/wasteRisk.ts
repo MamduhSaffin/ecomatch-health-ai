@@ -5,7 +5,7 @@ import {
   getFacilityById,
   getProductBySku,
 } from './dataset';
-import { forecastFacilitySku } from './forecasting';
+import { summariseFacilitySku } from './forecasting';
 
 export const MIN_TRANSFER_SHELF_LIFE_DAYS = 14;
 
@@ -31,7 +31,7 @@ export function assessBatchWasteRisks(
     const { facilityId, sku } = sortedFefo[0];
     const facility = getFacilityById(facilityId);
     const product = getProductBySku(sku);
-    const forecast = forecastFacilitySku(facilityId, sku, batches, demandMultiplier);
+    const forecast = summariseFacilitySku(facilityId, sku, batches, demandMultiplier);
     const dailyDemand = Math.max(0.1, forecast.avgWeeklyDemand / 7);
 
     // FEFO allocation: earlier-expiring eligible batches absorb local facility demand first
