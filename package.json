@@ -28,9 +28,7 @@
     "zod": "^4.6.7"
   },
   "overrides": {
-    "body-parser": {
-      "iconv-lite": "0.7.3"
-    }
+    "iconv-lite": "0.7.3"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
