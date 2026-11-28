@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 const AuthModal = lazy(() => import('./components/AuthModal').then(module => ({ default: module.AuthModal })));
 import { PublicShowcasePage } from './pages/PublicShowcasePage';
 const WorkspaceLayout = lazy(() => import('./pages/WorkspaceLayout').then(module => ({ default: module.WorkspaceLayout })));
-import { setAuthSession, type AuthUserClient } from './services/api';
+import { api, setAuthSession, type AuthUserClient } from './services/api';
 
 export function App() {
   const [view, setView] = useState<'public' | 'workspace'>('public');
@@ -19,6 +19,24 @@ export function App() {
       root.classList.remove('dark');
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    if (window.location.pathname !== '/auth/callback') return;
+    const params = new URLSearchParams(window.location.hash.slice(1));
+    const token = params.get('access_token');
+    window.history.replaceState(null, '', '/');
+    if (!token) { setAuthModalOpen(true); return; }
+    setAuthSession(token, false);
+    api.getAuthStatus().then(status => {
+      if (!status.authenticated || !status.user) throw new Error('Account not approved');
+      setAuthUser(status.user);
+      setIsDemo(false);
+      setView('workspace');
+    }).catch(() => {
+      setAuthSession(null, true);
+      setAuthModalOpen(true);
+    });
+  }, []);
 
   const handleExploreDemo = () => {
     setAuthSession(null, true);
