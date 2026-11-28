@@ -115,6 +115,8 @@ describe('Engine D & E — Prescriptive Optimisation & Impact Provenance', () =>
     expect(opt.deltas.wasteDivertedKg).toBeGreaterThan(0);
     expect(opt.deltas.avoidedCo2eKg).toBeGreaterThan(0);
 
+    expect(opt.deltas.avoidedProcurementUsd).toBeCloseTo(opt.baseline.procurementCostUsd - opt.optimised.procurementCostUsd, 2);
+    if (opt.baseline.unmetShortageUnits === 0) expect(opt.deltas.stockoutReductionPct).toBe(0);
     const impact = computeImpactSummary(batches, []);
     expect(impact.observed.totalInventoryValueUsd).toBeGreaterThan(0);
     expect(impact.simulatedOptimised.potentialNetSavingsUsd).toBe(opt.deltas.netSavingsUsd);

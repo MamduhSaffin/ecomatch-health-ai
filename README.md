@@ -7,7 +7,7 @@
 - **Product Family**: TGPU Innovator Labs (Standalone competition repository: `ecomatch-health-ai`)
 - **Proposed Team**: Nexus Intelligence (registration pending confirmation)
 - **Team members**: Muhammad Mamduh Saffin, Michael Alkali, Muhammad Mukhtaar Suleiman
-- **Proposed deployment**: https://ecomatch.tgpu.tech (not yet verified)
+- **Deployment**: https://ecomatch.tgpu.tech (Cloudflare production build verified; browser workflows require independent validation)
 
 ---
 
@@ -24,8 +24,8 @@ EcoMatch Health AI transforms isolated healthcare facilities into a collaborativ
 1. **Engine A — Predictive Demand Intelligence (`src/engines/forecasting.ts`)**: Evaluates 4 models per facility-SKU series (4-Week Moving Average baseline, Holt-Winters Seasonal Smoothing, Ridge Lag-Fourier Regression, and Gradient Boosted Decision Ensemble) on strict chronological splits (`Train: 72w | Validation: 16w | Holdout Test: 16w`) with zero data leakage, 95% prediction intervals, depletion horizons, and stockout probability.
 2. **Engine B — Waste & Expiry Risk Intelligence (`src/engines/wasteRisk.ts`)**: Performs First-Expiry-First-Out (FEFO) batch demand allocation, predicts unused units prior to expiration, calculates financial exposure, and produces an explainable 0–100 Waste Risk Score decomposed into 4 transparent factors.
 3. **Engine C — Intelligent Resource Matchmaking (`src/engines/matchmaking.ts`)**: Applies hard compliance eligibility gates **before** scoring—automatically rejecting expired, recalled, damaged, restricted, `<14`-day shelf-life, or storage-incompatible lots—then computes a transparent 0–100 compatibility score with Haversine distance and mandatory human approval.
-4. **Engine D — Prescriptive Optimisation (`src/engines/optimisation.ts`)**: Solves a capacitated multi-facility redistribution vs. external procurement linear programme benchmarking Conventional Isolated Operations against EcoMatch Optimised Redistribution, with real-time scenario stress-testing.
-5. **Engine E — Environmental & Economic Impact Intelligence (`src/engines/impact.ts`)**: Separates **Observed Ledger**, **Model Predictions**, **Simulated LP Outcomes**, and **Estimated Environmental Benefits** (waste diverted in kg and estimated avoided CO2e net of courier transit emissions).
+4. **Engine D — Prescriptive Optimisation (`src/engines/optimisation.ts`)**: Uses a constrained greedy redistribution heuristic (not a globally optimal allocation heuristic) benchmarking Conventional Isolated Operations against EcoMatch Optimised Redistribution, with real-time scenario stress-testing.
+5. **Engine E — Environmental & Economic Impact Intelligence (`src/engines/impact.ts`)**: Separates **Observed Ledger**, **Model Predictions**, **Simulated Redistribution Outcomes**, and **Estimated Environmental Benefits** (waste diverted in kg and estimated avoided CO2e net of courier transit emissions).
 6. **Engine F — AI Resource Operations Agent (`server/services/aiAgent.ts`)**: Evidence-grounded operational assistant powered by server-side Gemini (`gemini-4-hydrogen`) alongside an explicit Deterministic Ledger Query mode. Refuses clinical diagnosis/treatment queries and enforces human approval on proposed transfers.
 
 ---

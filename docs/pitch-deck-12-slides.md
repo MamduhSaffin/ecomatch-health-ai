@@ -39,7 +39,7 @@
 1. **Engine A**: Chronological demand forecasting with 95% uncertainty intervals.
 2. **Engine B**: FEFO batch depletion & explainable 0–100 waste-risk scoring.
 3. **Engine C**: Hard safety-gated matchmaking (blocks expired/recalled lots before scoring).
-4. **Engine D**: Capacitated multi-facility linear programming (LP) redistribution solver.
+4. **Engine D**: Capacitated multi-facility greedy allocation heuristic (LP) redistribution solver.
 5. **Engine E**: Provenance-separated SDG 12 financial & carbon accounting.
 6. **Engine F**: Evidence-grounded AI Resource Operations Agent with clinical refusal guardrails.
 
@@ -76,8 +76,8 @@
 ---
 
 ## Slide 10 — Measurable Impact (Transparent Provenance)
-- Clearly separates **Observed Ledger**, **Model Predictions**, **Simulated LP Outcomes**, and **Estimated Environmental Benefits**.
-- On the baseline 8-facility demonstration network, Engine D LP optimisation reduces total operational spend, diverts expiring consumables by weight (kg), and avoids net CO2e emissions (deducting `0.12 kg CO2e/km` courier transit).
+- Clearly separates **Observed Ledger**, **Model Predictions**, **Simulated Redistribution Outcomes**, and **Estimated Environmental Benefits**.
+- On the baseline 8-facility demonstration network, Engine D heuristic optimisation reduces total operational spend, diverts expiring consumables by weight (kg), and avoids net CO2e emissions (deducting `0.12 kg CO2e/km` courier transit).
 - Scenario Simulation Lab proves resilience under +35% demand surges, -30% budget cuts, and 5-week supplier disruptions.
 
 ---

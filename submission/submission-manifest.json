@@ -9,12 +9,12 @@
       "id": "DEL-01",
       "name": "Working Full-Stack Software Application & Public Judge Demo Mode",
       "fileLocation": "src/ & server.ts",
-      "publicUrl": "Pending public deployment confirmation",
+      "publicUrl": "https://ecomatch.tgpu.tech",
       "fileSizeBytes": null,
       "completionStatus": "Tested",
-      "validationStatus": "Verified cleanly via `npm run lint`, `npm run build`, and `bun audit` (0 vulnerabilities)",
+      "validationStatus": "Cloudflare production deployment confirmed for cb79430; complete browser validation pending.",
       "knownLimitations": "Runs self-contained in-memory store with Supabase PostgreSQL RLS migration ready for external DB attachment.",
-      "outstandingAction": "Publish live public URL prior to LMS submission."
+      "outstandingAction": "Validate public Judge Demo workflows and founder login in browser."
     },
     {
       "id": "DEL-02",
