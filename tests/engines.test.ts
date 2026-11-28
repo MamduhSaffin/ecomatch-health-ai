@@ -1,7 +1,9 @@
+import type { TransferRecord } from '../src/types/domain';
 import { describe, expect, it } from 'vitest';
 import {
   DEFAULT_SCENARIO_PARAMS,
   FACILITIES,
+  haversineDistanceKm,
   PRODUCTS,
   assessBatchWasteRisks,
   computeImpactSummary,
@@ -113,7 +115,13 @@ describe('Engine D & E — Prescriptive Optimisation & Impact Provenance', () =>
     expect(opt.optimised.expiryWasteUnits).toBeLessThan(opt.baseline.expiryWasteUnits);
     expect(opt.deltas.netSavingsUsd).toBeGreaterThan(0);
     expect(opt.deltas.wasteDivertedKg).toBeGreaterThan(0);
-    expect(opt.deltas.avoidedCo2eKg).toBeGreaterThan(0);
+    const expectedNetCarbon = opt.allocations.reduce((sum, a) => {
+      const product = PRODUCTS.find(p => p.sku === a.sku)!;
+      const donor = FACILITIES.find(f => f.id === a.donorFacilityId)!;
+      const recipient = FACILITIES.find(f => f.id === a.recipientFacilityId)!;
+      return sum + a.wasteDivertedKg * product.emissionFactorKgCo2PerKg - haversineDistanceKm(donor.lat, donor.lon, recipient.lat, recipient.lon) * 0.12;
+    }, 0);
+    expect(opt.deltas.avoidedCo2eKg).toBeCloseTo(expectedNetCarbon, 1);
 
     expect(opt.deltas.avoidedProcurementUsd).toBeCloseTo(opt.baseline.procurementCostUsd - opt.optimised.procurementCostUsd, 2);
     if (opt.baseline.unmetShortageUnits === 0) expect(opt.deltas.stockoutReductionPct).toBe(0);
@@ -170,5 +178,18 @@ describe('Engine F & Security Guardrails', () => {
     const verified = verifySessionToken(token);
     expect(verified?.email).toBe('ops@metro.test');
     expect(verifySessionToken(`${token}tampered`)).toBeNull();
+  });
+});
+
+
+describe('Impact accounting regression', () => {
+  it('counts completed transfers only', () => {
+    const transfers = (['Pending Approval', 'Approved', 'In Transit', 'Completed', 'Rejected'] as const).map(status => ({status, quantity: 10, netSavingsUsd: 20, wasteDivertedKg: 3, avoidedCo2eKg: -2} as TransferRecord));
+    const { observed } = computeImpactSummary(createInitialInventoryBatches(), transfers);
+    expect(observed.completedTransfersCount).toBe(1);
+    expect(observed.completedUnitsTransferred).toBe(10);
+    expect(observed.completedNetSavingsUsd).toBe(20);
+    expect(observed.completedWasteDivertedKg).toBe(3);
+    expect(observed.completedAvoidedCo2eKg).toBe(-2);
   });
 });

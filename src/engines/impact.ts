@@ -10,7 +10,7 @@ import { assessBatchWasteRisks } from './wasteRisk';
  * Strictly distinguishes:
  *   1. Observed Ledger results (actual completed transfers & current ledger totals)
  *   2. Model-Generated Predictions (forecast shortages & expiry risks)
- *   3. Simulated Operational Outcomes (LP optimised network deltas)
+ *   3. Simulated Operational Outcomes (greedy redistribution network deltas)
  *   4. Estimated Environmental Benefits (transparent emission factors & assumptions)
  */
 export function computeImpactSummary(
@@ -21,16 +21,16 @@ export function computeImpactSummary(
     Math.round(batches.reduce((sum, b) => sum + b.quantityOnHand * b.unitCostUsd, 0) * 100) / 100;
   const totalUnitsOnHand = batches.reduce((sum, b) => sum + b.quantityOnHand, 0);
 
-  const completedOrApproved = transfers.filter(
-    (t) => t.status === 'Approved' || t.status === 'In Transit' || t.status === 'Completed'
+  const completedTransfers = transfers.filter(
+    (t) => t.status === 'Completed'
   );
-  const completedUnitsTransferred = completedOrApproved.reduce((s, t) => s + t.quantity, 0);
+  const completedUnitsTransferred = completedTransfers.reduce((s, t) => s + t.quantity, 0);
   const completedNetSavingsUsd =
-    Math.round(completedOrApproved.reduce((s, t) => s + t.netSavingsUsd, 0) * 100) / 100;
+    Math.round(completedTransfers.reduce((s, t) => s + t.netSavingsUsd, 0) * 100) / 100;
   const completedWasteDivertedKg =
-    Math.round(completedOrApproved.reduce((s, t) => s + t.wasteDivertedKg, 0) * 100) / 100;
+    Math.round(completedTransfers.reduce((s, t) => s + t.wasteDivertedKg, 0) * 100) / 100;
   const completedAvoidedCo2eKg =
-    Math.round(completedOrApproved.reduce((s, t) => s + t.avoidedCo2eKg, 0) * 100) / 100;
+    Math.round(completedTransfers.reduce((s, t) => s + t.avoidedCo2eKg, 0) * 100) / 100;
 
   const wasteRisks = assessBatchWasteRisks(batches);
   const inventoryAtRiskUsd =
@@ -58,7 +58,7 @@ export function computeImpactSummary(
       totalUnitsOnHand,
       activeFacilities: FACILITIES.length,
       verifiedFacilities: FACILITIES.filter((f) => f.verified).length,
-      completedTransfersCount: completedOrApproved.length,
+      completedTransfersCount: completedTransfers.length,
       completedUnitsTransferred,
       completedNetSavingsUsd,
       completedWasteDivertedKg,
@@ -87,7 +87,7 @@ export function computeImpactSummary(
       primaryEmissionFactor: 'SKU-specific factors based on published EPA WARM & Healthcare Without Harm polymer/sterile waste ranges',
       transportEmissionAdjustment: 'Net CO2e deducts 0.12 kg CO2e per corridor km for regional courier dispatch',
       serviceCapacityNote:
-        'Patient care episodes represent supply-availability capacity proxies (units × consumables per episode), not clinical outcome claims',
+        'Patient care episodes represent supply-availability capacity proxies (units × SKU-specific episodes per unit), not clinical outcome claims',
       syntheticDataDisclosure:
         'All facility stock quantities, consumption logs, and savings projections use a reproducible seeded synthetic demonstration dataset (seed 20261012)',
     },

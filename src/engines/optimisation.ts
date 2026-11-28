@@ -196,7 +196,7 @@ export function runPrescriptiveOptimisation(
 
     unitsRescued += qty;
     wasteDivertedKg += weightKg;
-    avoidedCo2eKg += Math.max(0, weightKg * prod.emissionFactorKgCo2PerKg - arc.distanceKm * 0.12);
+    avoidedCo2eKg += weightKg * prod.emissionFactorKgCo2PerKg - arc.distanceKm * 0.12;
     patientEpisodesSupported += qty * prod.patientEpisodesPerUnit;
 
     allocations.push({

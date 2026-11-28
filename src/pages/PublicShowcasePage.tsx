@@ -90,7 +90,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
       'Competition: 10Alytics Global Hackathon 2026 | Health Track | UN SDG 12',
       'Data Provenance: Reproducible Synthetic Healthcare Consumables Dataset (Seed 20261012)',
       '',
-      `Facilities Modeled: ${FACILITIES.length} verified facilities across 3 regional corridors`,
+      `Facilities Modeled: ${FACILITIES.length} synthetic facilities across 3 regional corridors`,
       `Eligible Consumable SKUs: ${PRODUCTS.length} non-regulated medical consumables (zero controlled medicines)`,
       `Historical Consumption Horizon: 104 weeks (Train: 72w | Validation: 16w | Holdout Test: 16w)`,
       `Simulated Net Operational Savings: $${preview.impact.simulatedOptimised.potentialNetSavingsUsd.toLocaleString()}`,
@@ -164,10 +164,10 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                   10Alytics Global Hackathon 2026 · Health Track · UN SDG 12
                 </p>
                 <h1 className="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.08]">
-                  Predict Waste. Redistribute Resources. Expand Healthcare Capacity.
+                  Expand Healthcare Capacity. Reduce Waste. Grow Responsibly.
                 </h1>
                 <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-                  Healthcare facilities discard expiring medical consumables while neighbouring clinics face urgent stockouts. EcoMatch Health AI unifies chronological demand forecasting, FEFO expiry-risk scoring, explainable matchmaking, and linear-programming redistribution into one human-governed circular network.
+                  Healthcare facilities discard expiring medical consumables while neighbouring clinics face urgent stockouts. EcoMatch Health AI unifies chronological demand forecasting, FEFO expiry-risk scoring, explainable matchmaking, and constrained greedy redistribution into one human-governed circular network.
                 </p>
               </div>
 
@@ -218,12 +218,12 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
               </p>
             </div>
             <div className="bg-white dark:bg-[#0D192B] p-5">
-              <p className="text-xs text-slate-500 dark:text-slate-400">Simulated Net Savings · LP Engine</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Simulated Net Savings · Redistribution Engine</p>
               <p className="mt-2 text-2xl font-bold font-mono tabular-nums text-emerald-700 dark:text-emerald-400">
                 ${preview.impact.simulatedOptimised.potentialNetSavingsUsd.toLocaleString()}
               </p>
               <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 tabular-nums">
-                ${preview.impact.simulatedOptimised.potentialProcurementSavingsUsd.toLocaleString()} avoided procurement net of transit
+                ${preview.impact.simulatedOptimised.potentialProcurementSavingsUsd.toLocaleString()} avoided procurement before transport costs
               </p>
             </div>
             <div className="bg-white dark:bg-[#0D192B] p-5">
@@ -259,7 +259,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
           <div className="max-w-7xl mx-auto px-6">
             <div className="max-w-3xl">
               <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400">
-                Health Track Problem Statement · UN SDG 12 Alignment
+                Expanding Production in the Face of Environmental Responsibility · UN SDG 12
               </p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
                 Isolated procurement creates simultaneous expiry waste and clinical shortages.
@@ -375,7 +375,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                   Capacitated Multi-Facility Redistribution Solver
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Solves a minimum-cost capacitated redistribution and procurement optimisation programme balancing courier distance, safety-stock compliance, budget constraints, and expiry deadlines—benchmarked side-by-side against conventional isolated procurement.
+                  Uses a constrained greedy allocation heuristic to balance courier distance, safety stock, procurement constraints and expiry deadlines. It compares against conventional isolated procurement without claiming global optimality.
                 </p>
               </div>
 
@@ -385,7 +385,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                   Audit-Ready SDG 12 Attribution
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Explicitly separates Observed Ledger transfers, Model Predictions, Simulated LP outcomes, and Estimated CO2e savings (net of courier transport emissions) using documented weight and emission factors.
+                  Explicitly separates Observed Ledger transfers, Model Predictions, Simulated redistribution outcomes, and Estimated CO2e savings (net of courier transport emissions) using documented weight and emission factors.
                 </p>
               </div>
 
@@ -395,7 +395,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                   Evidence-Grounded Operations Assistant
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Retrieves live batch risks, active matches, and LP savings to answer executive supply questions with cited evidence and proposed approval actions—strictly refusing clinical diagnosis or treatment advice.
+                  Retrieves live batch risks, active matches, and simulated savings to answer executive supply questions with cited evidence and proposed approval actions—strictly refusing clinical diagnosis or treatment advice.
                 </p>
               </div>
             </div>
