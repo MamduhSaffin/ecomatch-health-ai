@@ -763,18 +763,48 @@ export default {
       return env.ASSETS.fetch(request);
     }
 
-    if (url.pathname.startsWith('/api/auth/') && request.method !== 'GET') {
-      return Response.json(
-        { error: 'Authenticated production workspace is disabled in the public competition preview.' },
-        { status: 403 },
-      );
+    // Hosted preview: verify Supabase identities on every private request.
+    const origin = 'https://mpidjwjghtpeybedmbkd.supabase.co';
+    const key = 'sb_publishable_LUGX_-Co3zolt94Qaj9AQg_m2zidH68';
+    const founderId = '6b3d75b8-924e-46e8-8e2d-972f0818f353';
+    const founder: AuthUser = { id: founderId, email: 'mamduh@tgpu.my', name: 'Platform Administrator', role: 'founder_admin', orgId: 'ALL' };
+    const response = (body: unknown, status = 200) => Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
+    const verify = async (token: string) => {
+      if (!token) return false;
+      try {
+        const result = await fetch(origin + '/auth/v1/user', { headers: { apikey: key, Authorization: 'Bearer ' + token } });
+        if (!result.ok) return false;
+        const identity = await result.json() as { id?: string; email?: string; email_confirmed_at?: string };
+        return identity.id === founderId && identity.email?.toLowerCase() === founder.email && Boolean(identity.email_confirmed_at);
+      } catch { return false; }
+    };
+    if (url.pathname === '/api/auth/login' && request.method === 'POST') {
+      if (request.headers.get('Origin') !== url.origin) return response({ error: 'Invalid origin.' }, 403);
+      const input = await request.json().catch(() => null) as { email?: unknown; password?: unknown } | null;
+      if (!input || typeof input.email !== 'string' || input.email.trim().toLowerCase() !== founder.email || typeof input.password !== 'string' || input.password.length > 128) return response({ error: 'Invalid credentials or access not approved.' }, 401);
+      try {
+        const result = await fetch(origin + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: key, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: founder.email, password: input.password }) });
+        if (!result.ok) return response({ error: 'Invalid credentials or access not approved.' }, 401);
+        const session = await result.json() as { access_token?: string };
+        if (!session.access_token || !await verify(session.access_token)) return response({ error: 'Access not approved.' }, 403);
+        return response({ token: session.access_token, user: founder });
+      } catch { return response({ error: 'Identity provider unavailable.' }, 503); }
     }
-
+    const bearer = request.headers.get('Authorization')?.match(/^Bearer (.+)$/)?.[1] || '';
+    if (url.pathname === '/api/auth/status' && request.method === 'GET') {
+      const authenticated = await verify(bearer);
+      return response({ authenticated, user: authenticated ? founder : null, adminConfig: { configuredViaEnv: true, claimed: true }, organisations: ORGANISATIONS, inviteOnly: true });
+    }
+    if (url.pathname.startsWith('/api/auth/')) return response({ error: 'Workspace access is invitation only.' }, 403);
     const isDemo = request.headers.get('x-ecomatch-demo') === 'true' || url.searchParams.get('demo') === 'true';
-    if (!publicApiPaths.has(url.pathname) && !isDemo) {
-      return Response.json({ error: 'Use the public Judge Demo.' }, { status: 403 });
-    }
-
-    return handleAsNodeRequest(API_PORT, request);
+    if (publicApiPaths.has(url.pathname) || (isDemo && !bearer)) return handleAsNodeRequest(API_PORT, request);
+    if (!await verify(bearer)) return response({ error: 'Authentication required. Use Sign In or Explore Live Demo.' }, 401);
+    // Bridge only the verified identity to the existing internal role checks.
+    // Strip all demo selectors so private requests cannot accidentally mutate the demo.
+    url.searchParams.delete('demo');
+    const headers = new Headers(request.headers);
+    headers.delete('x-ecomatch-demo');
+    headers.set('Authorization', 'Bearer ' + issueSessionToken(founder));
+    return handleAsNodeRequest(API_PORT, new Request(url, { method: request.method, headers, body: request.body }));
   },
 };
