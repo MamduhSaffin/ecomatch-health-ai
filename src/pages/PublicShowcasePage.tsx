@@ -90,7 +90,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
       'Competition: 10Alytics Global Hackathon 2026 | Health Track | UN SDG 12',
       'Data Provenance: Reproducible Synthetic Healthcare Consumables Dataset (Seed 20261012)',
       '',
-      `Facilities Modeled: ${FACILITIES.length} verified facilities across 3 regional corridors`,
+      `Facilities Modeled: ${FACILITIES.length} demonstration facilities across 3 regional corridors`,
       `Eligible Consumable SKUs: ${PRODUCTS.length} non-regulated medical consumables (zero controlled medicines)`,
       `Historical Consumption Horizon: 104 weeks (Train: 72w | Validation: 16w | Holdout Test: 16w)`,
       `Simulated Net Operational Savings: $${preview.impact.simulatedOptimised.potentialNetSavingsUsd.toLocaleString()}`,
@@ -152,6 +152,9 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
       </header>
 
       <main id="top">
+        <div className="max-w-7xl mx-auto px-6 py-3 text-sm text-slate-700 dark:text-slate-300">
+          <strong>Data provenance:</strong> Fictional facilities and reproducible synthetic stock and demand records. All scenario savings and environmental impacts are estimates, not measured hospital outcomes. <a className="underline" href="#data-provenance">View sources and limitations</a>.
+        </div>
         {/* LIVE IMPACT TICKER — CSS-animated growing count of redistributed supplies */}
         <LiveImpactTicker matches={preview.matches} impact={preview.impact} />
 
@@ -167,7 +170,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                   Predict Waste. Redistribute Resources. Expand Healthcare Capacity.
                 </h1>
                 <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-                  Healthcare facilities discard expiring medical consumables while neighbouring clinics face urgent stockouts. EcoMatch Health AI unifies chronological demand forecasting, FEFO expiry-risk scoring, explainable matchmaking, and linear-programming redistribution into one human-governed circular network.
+                  Healthcare facilities discard expiring medical consumables while neighbouring clinics face urgent stockouts. EcoMatch Health AI unifies chronological demand forecasting, FEFO expiry-risk scoring, explainable matchmaking, and constrained greedy redistribution into one human-governed circular network.
                 </p>
               </div>
 
@@ -218,7 +221,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
               </p>
             </div>
             <div className="bg-white dark:bg-[#0D192B] p-5">
-              <p className="text-xs text-slate-500 dark:text-slate-400">Simulated Net Savings · LP Engine</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Simulated Net Savings · greedy allocation Engine</p>
               <p className="mt-2 text-2xl font-bold font-mono tabular-nums text-emerald-700 dark:text-emerald-400">
                 ${preview.impact.simulatedOptimised.potentialNetSavingsUsd.toLocaleString()}
               </p>
@@ -247,6 +250,17 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
           </div>
         </section>
 
+        <section id="data-provenance" className="max-w-7xl mx-auto px-6 py-8 space-y-3">
+          <h2 className="text-xl font-bold">Data Sources &amp; Provenance</h2>
+          <p className="text-sm">Operational data: synthetic seed 20261012; 8 fictional facilities, 10 SKUs, 104 weeks. Forecasts and allocation estimates are computed from these records. No live hospital feed is connected.</p>
+          <p className="text-sm">Public contextual references (not live operational feeds or validated SKU-specific factors):</p>
+          <ul className="list-disc pl-5 text-sm space-y-1">
+            <li><a className="underline" href="https://www.who.int/news-room/fact-sheets/detail/health-care-waste">WHO healthcare waste fact sheet</a> — sector context.</li>
+            <li><a className="underline" href="https://supply.unicef.org/">UNICEF Supply Catalogue</a> — product reference.</li>
+            <li><a className="underline" href="https://www.epa.gov/warm">EPA WARM</a> — environmental modelling reference; not a validated product lifecycle assessment.</li>
+          </ul>
+          <p className="text-sm">Institutional inventory uploads require authorised records. Uploaded stock alone does not replace the synthetic historical demand series.</p>
+        </section>
         {/* SECTION 2: INTERACTIVE REGIONAL REDISTRIBUTION NETWORK MAP (SVG FLOWS) */}
         <RegionalDistributionMap
           facilities={FACILITIES}
@@ -385,7 +399,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                   Audit-Ready SDG 12 Attribution
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Explicitly separates Observed Ledger transfers, Model Predictions, Simulated LP outcomes, and Estimated CO2e savings (net of courier transport emissions) using documented weight and emission factors.
+                  Explicitly separates Observed Ledger transfers, Model Predictions, Simulated greedy allocation outcomes, and Estimated CO2e savings (net of courier transport emissions) using documented weight and emission factors.
                 </p>
               </div>
 
@@ -395,7 +409,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                   Evidence-Grounded Operations Assistant
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Retrieves live batch risks, active matches, and LP savings to answer executive supply questions with cited evidence and proposed approval actions—strictly refusing clinical diagnosis or treatment advice.
+                  Retrieves live batch risks, active matches, and greedy allocation savings to answer executive supply questions with cited evidence and proposed approval actions—strictly refusing clinical diagnosis or treatment advice.
                 </p>
               </div>
             </div>
@@ -489,7 +503,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                         Transparent Formulas & Provenance Separation
                       </h3>
                       <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                        {preview.impact.methodologyNotes.syntheticDataDisclosure}. All metrics are strictly separated into Observed Ledger values, Model Predictions, Simulated LP Outcomes, and Estimated Environmental Benefits.
+                        {preview.impact.methodologyNotes.syntheticDataDisclosure}. All metrics are strictly separated into Observed Ledger values, Model Predictions, Simulated greedy allocation Outcomes, and Estimated Environmental Benefits.
                       </p>
                       <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300 font-mono">
                         <li>• Emission Factors: {preview.impact.methodologyNotes.emissionFactorRange}</li>
@@ -634,7 +648,7 @@ export const PublicShowcasePage: React.FC<PublicShowcasePageProps> = ({
                 {
                   phase: 'Phase 01',
                   title: 'Isolated Demo & Validation',
-                  desc: 'Public Judge Demo sandbox with reproducible synthetic consumables dataset, verified ML benchmarks, and transparent LP optimisation.',
+                  desc: 'Public Judge Demo sandbox with reproducible synthetic consumables dataset, verified ML benchmarks, and transparent greedy allocation optimisation.',
                 },
                 {
                   phase: 'Phase 02',
