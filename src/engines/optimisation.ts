@@ -20,12 +20,9 @@ export const DEFAULT_SCENARIO_PARAMS: ScenarioParameters = {
 /**
  * Engine D — Prescriptive Multi-Facility Redistribution & Procurement Optimisation
  *
- * Solves a minimum-cost capacitated network flow LP per SKU:
- *   min  Sum(c_transport(i,j) * x_ij) + Sum(c_procure * p_j) + Sum(c_waste * w_i)
- *   s.t. Sum_j x_ij + w_i = surplus_i              (donor surplus balance)
- *        Sum_i x_ij + p_j + u_j = shortage_j       (recipient demand + safety stock satisfaction)
- *        0 <= x_ij <= maxConsumable_ij             (shelf-life & storage compatibility)
- *        Sum_j c_procure * p_j <= BudgetCap        (procurement budget constraint)
+ * Uses a feasible greedy allocation heuristic with approximate marginal benefits.
+ * Fixed shipment costs and minimum quantities mean global optimality is not guaranteed.
+ * Budget cuts are modelled as per-recipient procurement availability ratios.
  */
 export function runPrescriptiveOptimisation(
   batches: InventoryBatch[],
@@ -95,7 +92,7 @@ export function runPrescriptiveOptimisation(
     baselineWasteWeightKg += r.weightAtRiskKg;
   }
 
-  // Build eligible donor pool for LP redistribution
+  // Build eligible donor pool for redistribution
   interface DonorPool {
     batchId: string;
     facilityId: string;
@@ -113,7 +110,7 @@ export function runPrescriptiveOptimisation(
       remainingSurplus: r.predictedUnusedUnits,
     }));
 
-  // Build all feasible arcs sorted by highest net marginal benefit per unit (exact greedy LP dual ordering for bipartite transport)
+  // Build feasible arcs for greedy marginal-benefit ordering
   interface FeasibleArc {
     donorIdx: number;
     recipientIdx: number;
@@ -170,7 +167,7 @@ export function runPrescriptiveOptimisation(
   let wasteDivertedKg = 0;
   let avoidedCo2eKg = 0;
   let patientEpisodesSupported = 0;
-  let avoidedProcurementUsd = 0;
+  
 
   for (const arc of arcs) {
     const donor = donorPools[arc.donorIdx];
@@ -196,7 +193,7 @@ export function runPrescriptiveOptimisation(
     rec.remainingNeed -= qty;
 
     optimisedTransportUsd += transportCostUsd;
-    avoidedProcurementUsd += procurementSavedUsd;
+
     unitsRescued += qty;
     wasteDivertedKg += weightKg;
     avoidedCo2eKg += Math.max(0, weightKg * prod.emissionFactorKgCo2PerKg - arc.distanceKm * 0.12);
@@ -218,7 +215,7 @@ export function runPrescriptiveOptimisation(
     });
   }
 
-  // Remaining recipient needs after optimal redistribution must be externally procured
+  // Remaining recipient needs after heuristic redistribution must be externally procured
   let optimisedProcurementUsd = 0;
   let optimisedUnmetShortageUnits = 0;
   for (const rec of recipientNeeds) {
@@ -232,8 +229,8 @@ export function runPrescriptiveOptimisation(
   }
 
   const rescuedWasteValueUsd = allocations.reduce((sum, a) => {
-    const p = getProductBySku(a.sku);
-    return sum + a.unitsAllocated * (p?.unitCostUsd ?? 0);
+    const risk = wasteRisks.find((r) => r.batchId === a.batchId);
+    return sum + a.unitsAllocated * (risk && risk.predictedUnusedUnits > 0 ? risk.financialExposureUsd / risk.predictedUnusedUnits : 0);
   }, 0);
 
   const optimisedExpiryWasteUnits = Math.max(0, baselineExpiryWasteUnits - unitsRescued);
@@ -256,8 +253,6 @@ export function runPrescriptiveOptimisation(
     baselineUnmetShortageUnits > 0
       ? Math.round(((baselineUnmetShortageUnits - optimisedUnmetShortageUnits) / baselineUnmetShortageUnits) * 1000) /
         10
-      : unitsRescued > 0
-      ? 100
       : 0;
 
   // Keep totalNetworkDemandUnits referenced for consistent utilisation auditing
@@ -288,7 +283,7 @@ export function runPrescriptiveOptimisation(
     deltas: {
       unitsRescued,
       wasteReductionPct,
-      avoidedProcurementUsd: Math.round(avoidedProcurementUsd * 100) / 100,
+      avoidedProcurementUsd: Math.round((baselineProcurementUsd - optimisedProcurementUsd) * 100) / 100,
       netSavingsUsd: Math.round((baselineTotalCost - optimisedTotalCost) * 100) / 100,
       stockoutReductionPct,
       wasteDivertedKg: Math.round(wasteDivertedKg * 100) / 100,
