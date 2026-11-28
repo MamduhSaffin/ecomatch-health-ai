@@ -163,7 +163,7 @@ export function computeIntelligentMatches(
       // Transport carbon debit: ~0.12 kg CO2e per km for regional medical courier van
       const transportCo2e = distanceKm * 0.12;
       const grossAvoidedCo2e = weightKg * product.emissionFactorKgCo2PerKg;
-      const avoidedCo2eKg = Math.max(0, Math.round((grossAvoidedCo2e - transportCo2e) * 100) / 100);
+      const avoidedCo2eKg = Math.round((grossAvoidedCo2e - transportCo2e) * 100) / 100;
       const patientEpisodesSupported = recommendedTransferQty * product.patientEpisodesPerUnit;
 
       const factors: MatchScoreFactor[] = [
