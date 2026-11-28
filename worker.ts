@@ -770,13 +770,17 @@ export default {
     const founder: AuthUser = { id: founderId, email: 'mamduh@tgpu.my', name: 'Platform Administrator', role: 'founder_admin', orgId: 'ALL' };
     const response = (body: unknown, status = 200) => Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
     const verify = async (token: string) => {
-      if (!token) return false;
+      if (!token) return null;
       try {
         const result = await fetch(origin + '/auth/v1/user', { headers: { apikey: key, Authorization: 'Bearer ' + token } });
-        if (!result.ok) return false;
+        if (!result.ok) return null;
         const identity = await result.json() as { id?: string; email?: string; email_confirmed_at?: string };
-        return identity.id === founderId && identity.email?.toLowerCase() === founder.email && Boolean(identity.email_confirmed_at);
-      } catch { return false; }
+        if (!identity.id || !identity.email_confirmed_at) return null;
+        const email = identity.email?.toLowerCase();
+        if (identity.id === founderId && email === founder.email) return founder;
+        const team = email === 'excelay@gmail.com' ? 'Michael Alkali' : email === 'itgreensense2020@gmail.com' ? 'Muhammad Mukhtaar Suleiman' : null;
+        return team ? { id: identity.id, email: email!, name: team, role: 'read_only_reviewer' as const, orgId: 'ALL' as const } : null;
+      } catch { return null; }
     };
     if (url.pathname === '/api/auth/login' && request.method === 'POST') {
       if (request.headers.get('Origin') !== url.origin) return response({ error: 'Invalid origin.' }, 403);
@@ -792,19 +796,21 @@ export default {
     }
     const bearer = request.headers.get('Authorization')?.match(/^Bearer (.+)$/)?.[1] || '';
     if (url.pathname === '/api/auth/status' && request.method === 'GET') {
-      const authenticated = await verify(bearer);
-      return response({ authenticated, user: authenticated ? founder : null, adminConfig: { configuredViaEnv: true, claimed: true }, organisations: ORGANISATIONS, inviteOnly: true });
+      const actor = await verify(bearer);
+      return response({ authenticated: Boolean(actor), user: actor, adminConfig: { configuredViaEnv: true, claimed: true }, organisations: ORGANISATIONS, inviteOnly: true });
     }
     if (url.pathname.startsWith('/api/auth/')) return response({ error: 'Workspace access is invitation only.' }, 403);
     const isDemo = request.headers.get('x-ecomatch-demo') === 'true' || url.searchParams.get('demo') === 'true';
     if (publicApiPaths.has(url.pathname) || (isDemo && !bearer)) return handleAsNodeRequest(API_PORT, request);
-    if (!await verify(bearer)) return response({ error: 'Authentication required. Use Sign In or Explore Live Demo.' }, 401);
+    const actor = await verify(bearer);
+    if (!actor) return response({ error: 'Authentication required. Use Sign In or Explore Live Demo.' }, 401);
+    if (actor.role !== 'founder_admin' && request.method !== 'GET' && !['/api/simulation/run', '/api/agent/query'].includes(url.pathname)) return response({ error: 'Team reviewer access is read-only.' }, 403);
     // Bridge only the verified identity to the existing internal role checks.
     // Strip all demo selectors so private requests cannot accidentally mutate the demo.
     url.searchParams.delete('demo');
     const headers = new Headers(request.headers);
     headers.delete('x-ecomatch-demo');
-    headers.set('Authorization', 'Bearer ' + issueSessionToken(founder));
+    headers.set('Authorization', 'Bearer ' + issueSessionToken(actor));
     return handleAsNodeRequest(API_PORT, new Request(url, { method: request.method, headers, body: request.body }));
   },
 };
