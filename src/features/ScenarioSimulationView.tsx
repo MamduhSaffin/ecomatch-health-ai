@@ -103,7 +103,7 @@ export const ScenarioSimulationView: React.FC<ScenarioSimulationViewProps> = ({ 
       ),
     ];
     triggerFileDownload(
-      `ecomatch-lp-allocation-plan-${activePreset}.csv`,
+      `ecomatch-greedy-allocation-plan-${activePreset}.csv`,
       rows.join('\n'),
       'text/csv;charset=utf-8'
     );
@@ -171,7 +171,7 @@ export const ScenarioSimulationView: React.FC<ScenarioSimulationViewProps> = ({ 
         <section className="lg:col-span-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0D192B] p-5 space-y-5">
           <div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-              Stress-Test Parameters (Live LP Re-Optimisation)
+              Stress-Test Parameters (Live greedy allocation Re-Optimisation)
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               {running ? 'Recalculating capacitated network flow...' : 'Adjust operational shocks to compare isolated vs. redistributed resilience'}
@@ -334,7 +334,7 @@ export const ScenarioSimulationView: React.FC<ScenarioSimulationViewProps> = ({ 
         </section>
       </div>
 
-      {/* Optimal LP Allocation Plan Table */}
+      {/* Optimal greedy allocation Allocation Plan Table */}
       <section className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0D192B] overflow-hidden">
         <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
           <div>
