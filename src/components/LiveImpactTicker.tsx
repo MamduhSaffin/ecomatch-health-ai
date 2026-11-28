@@ -9,7 +9,6 @@ interface LiveImpactTickerProps {
 
 export const LiveImpactTicker: React.FC<LiveImpactTickerProps> = ({ matches, impact }) => {
   const [paused, setPaused] = useState(false);
-  const [tickCount, setTickCount] = useState(0);
 
   // Respect prefers-reduced-motion on initial mount
   useEffect(() => {
@@ -18,62 +17,16 @@ export const LiveImpactTicker: React.FC<LiveImpactTickerProps> = ({ matches, imp
     }
   }, []);
 
-  // Derive realistic per-cycle baseline from Engine C/E matches
-  const baseStats = useMemo(() => {
-    const matchUnits = matches.reduce((sum, m) => sum + m.recommendedTransferQty, 0);
-    const baseUnits = Math.max(matchUnits, 180) + impact.observed.completedUnitsTransferred;
-    const avgWeightPerUnit =
-      baseUnits > 0 ? impact.simulatedOptimised.potentialWasteDivertedKg / Math.max(1, matchUnits) : 0.42;
-    const avgCo2PerUnit =
-      baseUnits > 0 ? impact.simulatedOptimised.potentialAvoidedCo2eKg / Math.max(1, matchUnits) : 1.3;
-    const increments =
-      matches.length > 0
-        ? matches.map((m) => Math.max(4, Math.min(28, Math.round(m.recommendedTransferQty / 3))))
-        : [12, 8, 15, 10];
-    return { baseUnits, avgWeightPerUnit, avgCo2PerUnit, increments };
-  }, [impact, matches]);
-
-  // Increment growing simulated redistribution count smoothly every 2.4s when active
-  useEffect(() => {
-    if (paused) return;
-    const interval = window.setInterval(() => {
-      setTickCount((prev) => prev + 1);
-    }, 2400);
-    return () => window.clearInterval(interval);
-  }, [paused]);
-
-  const addedUnits = useMemo(() => {
-    let total = 0;
-    for (let i = 0; i < tickCount; i += 1) {
-      total += baseStats.increments[i % baseStats.increments.length];
-    }
-    return total;
-  }, [baseStats.increments, tickCount]);
-
-  const totalUnitsRedistributed = baseStats.baseUnits + addedUnits;
-  const totalWasteDivertedKg = Math.round(
-    impact.simulatedOptimised.potentialWasteDivertedKg + addedUnits * baseStats.avgWeightPerUnit
-  );
-  const totalCo2SavedKg = Math.round(
-    impact.simulatedOptimised.potentialAvoidedCo2eKg + addedUnits * baseStats.avgCo2PerUnit
-  );
+  // Display only computed scenario totals; animation never changes numerical results.
+  const totalUnitsRedistributed = matches.reduce((sum, m) => sum + m.recommendedTransferQty, 0);
+  const totalWasteDivertedKg = impact.simulatedOptimised.potentialWasteDivertedKg;
+  const totalCo2SavedKg = impact.simulatedOptimised.potentialAvoidedCo2eKg;
 
   const tickerItems = useMemo(() => {
-    if (matches.length === 0) {
-      return [
-        {
-          id: 'fallback-1',
-          text: 'Metropolitan General → Riverview Clinic · Sterile IV Infusion Sets · +60 units redistributed',
-        },
-        {
-          id: 'fallback-2',
-          text: 'St. Jude Regional → Harbourside Clinic · Nitrile Exam Gloves · +95 units redistributed',
-        },
-      ];
-    }
+    if (matches.length === 0) return [{ id: 'empty', text: 'No eligible transfer recommendations in this scenario.' }];
     return matches.slice(0, 6).map((m) => ({
       id: m.matchId,
-      text: `${m.donorFacilityName} → ${m.recipientFacilityName} · ${m.productName} · +${m.recommendedTransferQty} units (${m.wasteDivertedKg} kg diverted)`,
+      text: `${m.donorFacilityName} → ${m.recipientFacilityName} · ${m.productName} · ${m.recommendedTransferQty} units proposed (${m.wasteDivertedKg} kg potential diversion)`,
     }));
   }, [matches]);
 
@@ -83,17 +36,17 @@ export const LiveImpactTicker: React.FC<LiveImpactTickerProps> = ({ matches, imp
       className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B1526]"
     >
       <div className="max-w-7xl mx-auto px-6 py-2.5 flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6">
-        {/* Left: Growing Real-Time Simulated Counter */}
+        {/* Left: Computed scenario totals */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 shrink-0">
           <div className="flex items-baseline gap-2">
             <span className="text-xs font-medium text-emerald-700 dark:text-emerald-400 whitespace-nowrap">
-              Live Impact Ticker
+              Scenario Impact Ticker
             </span>
             <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">
               ·
             </span>
             <span className="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">
-              Simulated Network Rollout
+              Synthetic scenario estimates
             </span>
           </div>
 
@@ -106,14 +59,14 @@ export const LiveImpactTicker: React.FC<LiveImpactTickerProps> = ({ matches, imp
                 {totalUnitsRedistributed.toLocaleString()}
               </span>
               <span className="font-sans text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                supplies redistributed
+                units proposed (may overlap)
               </span>
             </div>
             <span aria-hidden="true" className="text-slate-300 dark:text-slate-700 hidden sm:inline">
               /
             </span>
             <span className="hidden sm:inline text-emerald-700 dark:text-emerald-400 font-semibold whitespace-nowrap">
-              {totalWasteDivertedKg.toLocaleString()} kg diverted
+              {totalWasteDivertedKg.toLocaleString()} kg potential diversion
             </span>
             <span aria-hidden="true" className="text-slate-300 dark:text-slate-700 hidden md:inline">
               /
