@@ -3,7 +3,7 @@
 ## 1. Synthetic Operational Dataset (Included & Reproducible)
 Because genuine hospital batch-level expiry and ward consumption ledgers are proprietary and subject to institutional confidentiality, EcoMatch Health AI uses a **100% reproducible synthetic healthcare consumables dataset** generated deterministically by `scripts/run_pipeline.py` (Mulberry32 PRNG seed `20261012`).
 
-- `data/synthetic/facilities.csv` — 8 verified healthcare facilities across 3 regional corridors
+- `data/synthetic/facilities.csv` — 8 fictional demonstration healthcare facilities across 3 regional corridors
 - `data/synthetic/products.csv` — 10 non-regulated medical consumables (zero controlled medicines)
 - `data/synthetic/weekly_consumption.csv` — 8,320 weekly consumption observations (104 weeks × 80 facility-SKU pairs)
 - `data/data_dictionary.csv` — Full schema and provenance dictionary
