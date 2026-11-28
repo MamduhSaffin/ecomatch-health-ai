@@ -125,6 +125,7 @@ export const api = {
       authenticated: boolean;
       user: AuthUserClient | null;
       adminConfig: { configuredViaEnv: boolean; claimed: boolean };
+      inviteOnly?: boolean;
       organisations: Organisation[];
     }>('/api/auth/status'),
 

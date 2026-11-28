@@ -18,6 +18,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 }) => {
   const [tab, setTab] = useState<'login' | 'register' | 'claim_admin'>('login');
   const [adminClaimed, setAdminClaimed] = useState(true);
+  const [inviteOnly, setInviteOnly] = useState(true);
   const [organisations, setOrganisations] = useState<Organisation[]>([]);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -33,9 +34,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     api
       .getAuthStatus()
       .then((status) => {
+        setInviteOnly(status.inviteOnly === true);
         setAdminClaimed(status.adminConfig.claimed);
+        if (status.inviteOnly) setTab('login');
         setOrganisations(status.organisations);
-        if (!status.adminConfig.claimed) {
+        if (!status.inviteOnly && !status.adminConfig.claimed) {
           setTab('claim_admin');
         }
       })
@@ -83,7 +86,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               Workspace Access
             </h2>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              Sign in with organisation-scoped RBAC or launch the isolated Judge Demo sandbox.
+              Sign in to your approved workspace or launch the isolated Judge Demo sandbox.
             </p>
           </div>
           <button
@@ -112,6 +115,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           >
             Sign In
           </button>
+          {!inviteOnly && (
           <button
             type="button"
             onClick={() => {
@@ -126,7 +130,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           >
             Create Account
           </button>
-          {!adminClaimed && (
+          )}
+          {!inviteOnly && !adminClaimed && (
             <button
               type="button"
               onClick={() => {
