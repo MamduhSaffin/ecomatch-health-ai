@@ -90,7 +90,7 @@ export const HospitalRoiCalculator: React.FC<HospitalRoiCalculatorProps> = ({
       '',
       '## Transparent Scaling Methodology',
       `- Reference Engine D Sandbox Size: ${baselineFacilityCount} facilities`,
-      `- Modeled LP Expiry Capture Rate: ${modeled.recoveryCapturePct}% of eligible near-expiry waste`,
+      `- Modeled greedy allocation Expiry Capture Rate: ${modeled.recoveryCapturePct}% of eligible near-expiry waste`,
       `- Net-to-Gross Efficiency (after regional courier costs): ${modeled.netToGrossPct}%`,
       `- Scope Safeguard: Non-regulated medical consumables only; human approval mandatory for every transfer.`,
     ].join('\n');
@@ -122,7 +122,7 @@ export const HospitalRoiCalculator: React.FC<HospitalRoiCalculatorProps> = ({
                 Estimate circular savings for your own hospital or clinic network.
               </h2>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                Adjust network size and consumables spend below to project annual waste prevention and budget recovery scaled directly from our live {baselineFacilityCount}-facility LP solver capture rate ({modeled.recoveryCapturePct}%).
+                Adjust network size and consumables spend below to project annual waste prevention and budget recovery scaled directly from our live {baselineFacilityCount}-facility greedy allocation solver capture rate ({modeled.recoveryCapturePct}%).
               </p>
             </div>
 
@@ -286,7 +286,7 @@ export const HospitalRoiCalculator: React.FC<HospitalRoiCalculatorProps> = ({
                   onClick={onExploreDemo}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:underline whitespace-nowrap"
                 >
-                  <span>Stress-test live LP allocations in Workspace</span>
+                  <span>Stress-test live greedy allocation allocations in Workspace</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>

@@ -59,8 +59,8 @@ export const CommonQuestionsSection: React.FC<CommonQuestionsSectionProps> = ({
         category: 'accuracy',
         categoryLabel: 'Redistribution Accuracy',
         question: 'How accurately does the prescriptive solver prevent expiry waste without causing donor stockouts?',
-        answer: `Engine B allocates forecasted demand across lot batches in strict First-Expiry-First-Out (FEFO) order to isolate units projected to remain unused past their expiration date. Engine D then solves a capacitated redistribution and procurement linear programme that strictly protects each donor facility's safety-stock reserve before recommending any outbound quantity. Across the active ${facilityCount}-facility sandbox, this balances courier distance, shelf-life remaining, and receiving clinic demand to model a ${impact.simulatedOptimised.potentialWasteReductionPct}% expiry waste reduction (${impact.simulatedOptimised.potentialWasteDivertedKg.toLocaleString()} kg diverted) and $${impact.simulatedOptimised.potentialNetSavingsUsd.toLocaleString()} in net operational savings.`,
-        evidenceNote: `FEFO depletion + capacitated LP · Safety-stock reserve enforced on every donor lot`,
+        answer: `Engine B allocates forecasted demand across lot batches in strict First-Expiry-First-Out (FEFO) order to isolate units projected to remain unused past their expiration date. Engine D then applies a constrained greedy redistribution heuristic that strictly protects each donor facility's safety-stock reserve before recommending any outbound quantity. Across the active ${facilityCount}-facility sandbox, this balances courier distance, shelf-life remaining, and receiving clinic demand to model a ${impact.simulatedOptimised.potentialWasteReductionPct}% expiry waste reduction (${impact.simulatedOptimised.potentialWasteDivertedKg.toLocaleString()} kg diverted) and $${impact.simulatedOptimised.potentialNetSavingsUsd.toLocaleString()} in net operational savings.`,
+        evidenceNote: `FEFO depletion + capacitated greedy allocation · Safety-stock reserve enforced on every donor lot`,
       },
       {
         id: 'eligibility-gates',
@@ -75,7 +75,7 @@ export const CommonQuestionsSection: React.FC<CommonQuestionsSectionProps> = ({
         category: 'governance',
         categoryLabel: 'Operational Control',
         question: 'Are transfers dispatched automatically, or do healthcare teams retain final approval?',
-        answer: 'No inventory transfer is ever executed autonomously. Every recommended corridor presents an explainable 0–100 compatibility score (broken down by expiry urgency, receiving demand fit, courier distance, and storage match) and enters a human-governed approval workflow requiring authorised supply-chain sign-off. Similarly, Engine F (the AI Resource Operations Assistant) cites live operational records to propose draft actions and is strictly constrained to decline clinical diagnosis, dosing, or medical treatment queries.',
+        answer: 'No inventory transfer is ever executed autonomously. Every recommended corridor presents an explainable 0–100 compatibility score (broken down by expiry urgency, receiving demand fit, courier distance, and storage match) and enters a human-governed approval workflow requiring authorised supply-chain sign-off. Similarly, Engine F (the AI Resource Operations Assistant) cites active workspace demonstration records to propose draft actions and is strictly constrained to decline clinical diagnosis, dosing, or medical treatment queries.',
         evidenceNote: 'Human-in-the-loop approval required · Full transfer ledger audit trail',
       },
       {
@@ -83,7 +83,7 @@ export const CommonQuestionsSection: React.FC<CommonQuestionsSectionProps> = ({
         category: 'methodology',
         categoryLabel: 'SDG 12 Methodology',
         question: 'How are avoided CO2e emissions and economic savings calculated transparently?',
-        answer: `Engine E strictly separates four provenance tiers—Observed Ledger transfers, Model Predictions, Simulated LP Outcomes, and Estimated Environmental Benefits—so projected values are never conflated with executed transfers. Avoided carbon emissions (${impact.simulatedOptimised.potentialAvoidedCo2eKg.toLocaleString()} kg CO2e est. in simulation) are calculated from documented per-pack consumable weights and published EPA WARM material/incineration factors, minus road-courier transport emissions based on actual inter-facility corridor kilometres.`,
+        answer: `Engine E strictly separates four provenance tiers—Observed Ledger transfers, Model Predictions, Simulated greedy allocation Outcomes, and Estimated Environmental Benefits—so projected values are never conflated with executed transfers. Avoided carbon emissions (${impact.simulatedOptimised.potentialAvoidedCo2eKg.toLocaleString()} kg CO2e est. in simulation) are calculated from documented per-pack consumable weights and published EPA WARM material/incineration factors, minus road-courier transport emissions based on actual inter-facility corridor kilometres.`,
         evidenceNote: `${impact.methodologyNotes.emissionFactorRange} · Net of courier transit emissions`,
       },
       {

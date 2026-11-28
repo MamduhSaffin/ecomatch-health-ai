@@ -157,7 +157,7 @@ export function runDeterministicOperationalQuery(
         {
           label: 'Avoided Procurement (Simulated)',
           value: `$${opt.deltas.avoidedProcurementUsd.toLocaleString()}`,
-          source: 'Engine D LP Solver',
+          source: 'Engine D greedy allocation Solver',
         },
         {
           label: 'Net Operational Savings (Simulated)',
@@ -192,7 +192,7 @@ export function runDeterministicOperationalQuery(
   return {
     mode: 'deterministic_analytics',
     modelUsed: 'Deterministic Multi-Engine Operational Query',
-    answer: `Network overview across ${ctx.impact.observed.activeFacilities} verified facilities: Total inventory value is $${ctx.impact.observed.totalInventoryValueUsd.toLocaleString()}, with $${ctx.impact.predicted.inventoryAtRiskUsd.toLocaleString()} at projected expiry risk and ${ctx.impact.predicted.predictedShortageSeriesCount} facility-SKU series facing near-term shortages. Engine D identifies $${ctx.optimisation.deltas.netSavingsUsd.toLocaleString()} in simulated net savings and ${ctx.optimisation.deltas.wasteDivertedKg} kg of avoidable waste through ${ctx.optimisation.allocations.length} optimised transfers.`,
+    answer: `Network overview across ${ctx.impact.observed.activeFacilities} demonstration facilities: Total inventory value is $${ctx.impact.observed.totalInventoryValueUsd.toLocaleString()}, with $${ctx.impact.predicted.inventoryAtRiskUsd.toLocaleString()} at projected expiry risk and ${ctx.impact.predicted.predictedShortageSeriesCount} facility-SKU series facing near-term shortages. Engine D identifies $${ctx.optimisation.deltas.netSavingsUsd.toLocaleString()} in simulated net savings and ${ctx.optimisation.deltas.wasteDivertedKg} kg of avoidable waste through ${ctx.optimisation.allocations.length} optimised transfers.`,
     evidenceItems: [
       {
         label: 'Inventory at Risk (Predicted)',
@@ -305,8 +305,9 @@ export async function runGeminiOperationalAgent(
 
   const systemInstruction = `You are Engine F, the EcoMatch Health AI Resource Operations Agent for a multi-facility medical consumables network aligned with UN SDG 12.
 STRICT RULES:
+0. Explicitly identify fictional facilities and synthetic records. Never present scenario estimates or demonstration transfers as achieved real-world outcomes.
 1. Ground EVERY quantitative statement exclusively in the provided JSON operational snapshot. Never invent facilities, batch IDs, savings, carbon factors, or clinical statistics.
-2. Distinguish clearly between Observed Ledger values, Model Predictions, Simulated LP Outcomes, and Estimated Environmental Benefits.
+2. Distinguish clearly between Observed Ledger values, Model Predictions, Simulated greedy allocation Outcomes, and Estimated Environmental Benefits.
 3. Never provide clinical diagnosis, prescribing advice, or treatment guidance.
 4. Every operational recommendation (transfers, reorder freezes) MUST specify requiresHumanApproval: true.
 5. Keep your answer concise (3-5 crisp, evidence-backed sentences) suitable for hospital supply-chain directors.`;

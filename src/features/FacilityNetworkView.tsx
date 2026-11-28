@@ -66,7 +66,7 @@ export const FacilityNetworkView: React.FC<FacilityNetworkViewProps> = ({ snapsh
         </div>
 
         <p className="text-xs text-slate-500 dark:text-slate-400">
-          {snapshot.facilities.filter((f) => f.verified).length} of {snapshot.facilities.length} facilities verified for inter-facility exchange
+          {snapshot.facilities.filter((f) => f.verified).length} of {snapshot.facilities.length} facilities marked eligible in the synthetic model
         </p>
       </div>
 
@@ -123,7 +123,7 @@ export const FacilityNetworkView: React.FC<FacilityNetworkViewProps> = ({ snapsh
               <div>
                 <div className="flex items-center gap-2 text-xs text-emerald-700 dark:text-emerald-400 font-medium">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>{selectedFacility.verified ? 'Verified Network Facility' : 'Pending Verification'}</span>
+                  <span>{selectedFacility.verified ? 'Demo eligibility flag: eligible' : 'Pending Verification'}</span>
                   <span aria-hidden="true">·</span>
                   <span className="font-mono">{selectedFacility.id}</span>
                 </div>

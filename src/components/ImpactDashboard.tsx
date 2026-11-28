@@ -319,7 +319,7 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({
 
           <div className="bg-slate-50 dark:bg-[#0D192B] p-6">
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Resource Redistribution Volume · LP Engine
+              Resource Redistribution Volume · greedy allocation Engine
             </p>
             <div className="mt-2 flex items-baseline gap-3">
               <span className="text-3xl font-extrabold font-mono tabular-nums text-slate-950 dark:text-white">
@@ -366,7 +366,7 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({
                   Cumulative Waste Diverted (kg) &amp; Net CO2e Saved (kg)
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  12-week simulated rollout across verified hospital corridors
+                  12-week simulated rollout across synthetic hospital corridors
                 </p>
               </div>
               <span className="text-xs font-mono tabular-nums text-emerald-700 dark:text-emerald-400">
@@ -515,7 +515,7 @@ export const ImpactDashboard: React.FC<ImpactDashboardProps> = ({
               <div className="flex items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
                 <div>
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                    Simulated LP Redistribution Corridors ({optimisation.allocations.length})
+                    Simulated greedy allocation Redistribution Corridors ({optimisation.allocations.length})
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
                     Top priority eligible batches routed under {preset.label}

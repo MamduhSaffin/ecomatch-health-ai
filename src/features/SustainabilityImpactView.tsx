@@ -47,11 +47,11 @@ export const SustainabilityImpactView: React.FC<SustainabilityImpactViewProps> =
       '## 1. Observed Ledger Results (Approved / Completed Transfers)',
       `- Completed / Approved Transfers: ${impact.observed.completedTransfersCount}`,
       `- Units Transferred: ${impact.observed.completedUnitsTransferred}`,
-      `- Observed Net Financial Savings: $${impact.observed.completedNetSavingsUsd.toLocaleString()}`,
-      `- Observed Waste Diverted: ${impact.observed.completedWasteDivertedKg} kg`,
+      `- Estimated Net Financial Savings: $${impact.observed.completedNetSavingsUsd.toLocaleString()}`,
+      `- Estimated Waste Diversion: ${impact.observed.completedWasteDivertedKg} kg`,
       `- Estimated Avoided Emissions (Observed Transfers): ${impact.observed.completedAvoidedCo2eKg} kg CO2e`,
       '',
-      '## 2. Simulated Network Optimisation Outcomes (Baseline vs. EcoMatch LP)',
+      '## 2. Simulated Network Optimisation Outcomes (Baseline vs. EcoMatch greedy allocation)',
       `- Baseline Total Operational Cost: $${optimisation.baseline.totalOperationalCostUsd.toLocaleString()}`,
       `- Optimised Total Operational Cost: $${optimisation.optimised.totalOperationalCostUsd.toLocaleString()}`,
       `- Simulated Avoided Procurement: $${optimisation.deltas.avoidedProcurementUsd.toLocaleString()}`,
@@ -81,15 +81,15 @@ export const SustainabilityImpactView: React.FC<SustainabilityImpactViewProps> =
       ['provenance_tier', 'metric', 'value', 'unit', 'notes'],
       ['Observed Ledger', 'Completed / Approved Transfers', impact.observed.completedTransfersCount, 'transfers', 'Human-approved in active workspace'],
       ['Observed Ledger', 'Units Transferred', impact.observed.completedUnitsTransferred, 'units', 'Preserved original expiry dates'],
-      ['Observed Ledger', 'Observed Net Financial Savings', impact.observed.completedNetSavingsUsd, 'USD', 'Net of courier logistics cost'],
-      ['Observed Ledger', 'Observed Waste Diverted', impact.observed.completedWasteDivertedKg, 'kg', 'Non-regulated consumables rescued'],
+      ['Observed Ledger', 'Estimated Net Financial Savings', impact.observed.completedNetSavingsUsd, 'USD', 'Net of courier logistics cost'],
+      ['Observed Ledger', 'Estimated Waste Diversion', impact.observed.completedWasteDivertedKg, 'kg', 'Non-regulated consumables rescued'],
       ['Observed Ledger', 'Estimated CO2e Avoided (Observed)', impact.observed.completedAvoidedCo2eKg, 'kg_co2e', 'Net of road transit emissions'],
-      ['Simulated LP Outcome', 'Baseline Total Operational Cost', Math.round(optimisation.baseline.totalOperationalCostUsd), 'USD', 'Conventional isolated purchasing'],
-      ['Simulated LP Outcome', 'Optimised Total Operational Cost', Math.round(optimisation.optimised.totalOperationalCostUsd), 'USD', 'Capacitated Engine D redistribution'],
-      ['Simulated LP Outcome', 'Simulated Avoided Procurement', optimisation.deltas.avoidedProcurementUsd, 'USD', 'Duplicate purchases avoided'],
-      ['Simulated LP Outcome', 'Simulated Net Savings', optimisation.deltas.netSavingsUsd, 'USD', 'After inter-facility courier costs'],
-      ['Simulated LP Outcome', 'Expiry Waste Reduction', optimisation.deltas.wasteReductionPct, 'percent', 'Relative to isolated baseline'],
-      ['Simulated LP Outcome', 'Simulated Waste Diverted', optimisation.deltas.wasteDivertedKg, 'kg', 'Total weight diverted from incineration'],
+      ['Simulated greedy allocation Outcome', 'Baseline Total Operational Cost', Math.round(optimisation.baseline.totalOperationalCostUsd), 'USD', 'Conventional isolated purchasing'],
+      ['Simulated greedy allocation Outcome', 'Optimised Total Operational Cost', Math.round(optimisation.optimised.totalOperationalCostUsd), 'USD', 'Capacitated Engine D redistribution'],
+      ['Simulated greedy allocation Outcome', 'Simulated Avoided Procurement', optimisation.deltas.avoidedProcurementUsd, 'USD', 'Duplicate purchases avoided'],
+      ['Simulated greedy allocation Outcome', 'Simulated Net Savings', optimisation.deltas.netSavingsUsd, 'USD', 'After inter-facility courier costs'],
+      ['Simulated greedy allocation Outcome', 'Expiry Waste Reduction', optimisation.deltas.wasteReductionPct, 'percent', 'Relative to isolated baseline'],
+      ['Simulated greedy allocation Outcome', 'Simulated Waste Diverted', optimisation.deltas.wasteDivertedKg, 'kg', 'Total weight diverted from incineration'],
       ['Estimated Impact', 'Simulated Net CO2e Avoided', optimisation.deltas.avoidedCo2eKg, 'kg_co2e', 'EPA WARM net of 0.12 kg/km transit'],
       ['Service Capacity Proxy', 'Patient Care Episodes Supported', optimisation.deltas.patientEpisodesSupported, 'episodes_proxy', 'Supply availability proxy (not clinical outcome)'],
     ];
@@ -106,7 +106,7 @@ export const SustainabilityImpactView: React.FC<SustainabilityImpactViewProps> =
             UN SDG 12 · Responsible Consumption & Production Impact Attribution
           </p>
           <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-            Explicitly distinguishes Observed Ledger transfers, Model Predictions, Simulated LP Outcomes, and Estimated Environmental Benefits.
+            Explicitly distinguishes Observed Ledger transfers, Model Predictions, Simulated greedy allocation Outcomes, and Estimated Environmental Benefits.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -142,7 +142,7 @@ export const SustainabilityImpactView: React.FC<SustainabilityImpactViewProps> =
         </div>
 
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0D192B] p-5">
-          <p className="text-xs font-mono text-slate-500 dark:text-slate-400">Simulated LP Outcome</p>
+          <p className="text-xs font-mono text-slate-500 dark:text-slate-400">Simulated greedy allocation Outcome</p>
           <p className="mt-2 text-2xl font-bold font-mono tabular-nums text-slate-950 dark:text-white">
             ${impact.simulatedOptimised.potentialNetSavingsUsd.toLocaleString()}
           </p>
@@ -179,7 +179,7 @@ export const SustainabilityImpactView: React.FC<SustainabilityImpactViewProps> =
             Conventional Isolated Procurement vs. EcoMatch Optimised Network ($)
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
-            Simulated financial comparison computed by Engine D LP solver on current inventory state
+            Simulated financial comparison computed by Engine D greedy allocation solver on current inventory state
           </p>
           <div className="h-[280px] w-full">
             <ResponsiveContainer width="100%" height="100%">
